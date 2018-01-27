@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.appus.splash.Splash;
 import com.hospicebangladesh.pms.http.HttpRequest;
 import com.hospicebangladesh.pms.http.HttpRequestCallBack;
+import com.hospicebangladesh.pms.utils.Session;
+import com.hospicebangladesh.pms.utils.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     public String loginPostUrl = "http://2aitbd.com/pms/api/login.php";
+    String mobile,password;
     @Bind(R.id.input_mobile)
     EditText _mobileText;
     @Bind(R.id.input_password)
@@ -105,8 +108,8 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String mobile = _mobileText.getText().toString();
-        String password = _passwordText.getText().toString();
+         mobile = _mobileText.getText().toString();
+         password = _passwordText.getText().toString();
 
         JSONObject postBody = new JSONObject();
         postBody.put("mobile", mobile);
@@ -128,8 +131,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                 JSONObject json = new JSONObject(serverResponse);
                                 int success = json.getInt("success");
+                                int insertid = json.getInt("insertid");
+
                                 if (success == 1) {
-                                    onLoginSuccess();
+                                    onLoginSuccess(insertid);
                                     progressDialog.dismiss();
                                 } else {
                                     onLoginFailed();
@@ -197,9 +202,11 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void onLoginSuccess() {
+    public void onLoginSuccess(int insertid) {
         _loginButton.setEnabled(true);
 
+        SessionManager sessionManager=new SessionManager(insertid,mobile,password);
+        Session.savePreference(getApplicationContext(),sessionManager);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

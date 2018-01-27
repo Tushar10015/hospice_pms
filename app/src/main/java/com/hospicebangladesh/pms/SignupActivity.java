@@ -19,6 +19,8 @@ import com.hospicebangladesh.pms.http.HttpRequest;
 import com.hospicebangladesh.pms.http.HttpRequestCallBack;
 import com.hospicebangladesh.pms.model.Profile;
 import com.hospicebangladesh.pms.repo.ProfileRepository;
+import com.hospicebangladesh.pms.utils.Session;
+import com.hospicebangladesh.pms.utils.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -218,9 +220,10 @@ public class SignupActivity extends AppCompatActivity {
 
                                 JSONObject json = new JSONObject(serverResponse);
                                 int success = json.getInt("success");
+                                int insertid = json.getInt("insertid");
                                 if (success == 1) {
-                                    ProfileRepository.insert(getApplicationContext(), list);
-                                    onSignupSuccess();
+                                //    ProfileRepository.insert(getApplicationContext(), list);
+                                    onSignupSuccess(insertid);
                                     progressDialog.dismiss();
                                 } else {
                                     onSignupFailed();
@@ -269,9 +272,13 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    public void onSignupSuccess() {
+    public void onSignupSuccess(int insertid) {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        String mobile = _mobileText.getText().toString();
+        String password = _passwordText.getText().toString();
+        SessionManager sessionManager=new SessionManager(insertid,mobile,password);
+        Session.savePreference(getApplicationContext(),sessionManager);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

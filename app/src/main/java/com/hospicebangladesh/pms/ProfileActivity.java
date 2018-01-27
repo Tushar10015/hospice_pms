@@ -20,13 +20,17 @@ import android.widget.Toast;
 
 import com.hospicebangladesh.pms.http.HttpRequest;
 import com.hospicebangladesh.pms.http.HttpRequestCallBack;
+import com.hospicebangladesh.pms.model.Medicine;
 import com.hospicebangladesh.pms.model.Profile;
 import com.hospicebangladesh.pms.repo.ProfileRepository;
+import com.hospicebangladesh.pms.utils.Session;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -37,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity";
     public String profileUpdatePostUrl = "http://2aitbd.com/pms/api/profile_update.php";
-
+    public String profileGetPostUrl = "http://2aitbd.com/pms/api/get_profile.php";
 
     @Bind(R.id.input_name)
     EditText _nameText;
@@ -67,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         _mobileText.setEnabled(false);
 
-        List<Profile> profileList = ProfileRepository.getAll(getApplicationContext());
+      /*  List<Profile> profileList = ProfileRepository.getAll(getApplicationContext());
 
         for (Profile profile : profileList) {
 
@@ -80,10 +84,15 @@ public class ProfileActivity extends AppCompatActivity {
 
             profile.getGender();
             profile.getAge();
-        }
+        }*/
 
 
         initializeSpinner();
+        try {
+            getProfile();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +135,92 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    public void getProfile() throws JSONException {
+
+        final ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Updating Account...");
+        progressDialog.show();
+
+     String user_id=   Session.getPreference(getApplicationContext(),Session.user_id);
+
+        JSONObject postBody = new JSONObject();
+        postBody.put("user_id", user_id);
+
+        try {
+            HttpRequest.postRequest(profileGetPostUrl, postBody.toString(), new HttpRequestCallBack() {
+                @Override
+                public void onSuccess(Response response) throws IOException {
+
+                    final String serverResponse = response.body().string();
+                    Log.d(TAG, serverResponse);
+                    ProfileActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+
+                                JSONObject json = new JSONObject(serverResponse);
+                                int success = json.getInt("success");
+                                String message = json.getString("message");
+                                if (success == 1) {
+                                    JSONArray jsonArrayProfiles = json.getJSONArray("profiles");
+                                    for (int i = 0; i < jsonArrayProfiles.length(); i++) {
+                                        JSONObject objProfiles = jsonArrayProfiles.getJSONObject(i);
+
+                                        String name = objProfiles.getString("name");
+                                        String user_name = objProfiles.getString("user_name");
+                                        String password = objProfiles.getString("password");
+                                        String phone = objProfiles.getString("phone");
+                                        String email = objProfiles.getString("email");
+                                        String gender = objProfiles.getString("gender");
+                                        String age = objProfiles.getString("age");
+
+
+                                        _nameText.setText(name);
+                                        _usernameText.setText(user_name);
+                                        _mobileText.setText(phone);
+                                        _emailText.setText(email);
+                                        _passwordText.setText(password);
+                                        _reEnterPasswordText.setText(password);
+
+                                    }
+                                    progressDialog.dismiss();
+                                } else {
+                                    Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+                                    progressDialog.dismiss();
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onFail() {
+                    ProfileActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Server is not responding properly", Toast.LENGTH_LONG).show();
+                            _signupButton.setEnabled(true);
+                            progressDialog.dismiss();
+                            Log.d(TAG, " onFail");
+                        }
+                    });
+
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+    }
 
     public void signup() throws JSONException {
         Log.d(TAG, "Signup");
