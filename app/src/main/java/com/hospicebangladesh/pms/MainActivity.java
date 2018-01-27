@@ -33,8 +33,17 @@ public class MainActivity extends AppCompatActivity
     private SliderLayout mDemoSlider;
 
 
-    @Bind(R.id.buttonPatientProfile)
-    Button _buttonPatientProfile;
+    @Bind(R.id.buttonProfile)
+    Button _buttonProfile;
+
+    @Bind(R.id.buttonPrescription)
+    Button _buttonPrescription;
+
+    @Bind(R.id.buttonFollowup)
+    Button _buttonFollowup;
+
+    @Bind(R.id.buttonUploadPicture)
+    Button _buttonUploadPicture;
 
 
     @Override
@@ -66,10 +75,33 @@ public class MainActivity extends AppCompatActivity
 
         startSlider();
 
-        _buttonPatientProfile.setOnClickListener(new View.OnClickListener() {
+
+
+        _buttonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            }
+        });
+
+        _buttonPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PrescriptionActivity.class));
+            }
+        });
+
+        _buttonFollowup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), FollowupActivity.class));
+            }
+        });
+
+        _buttonUploadPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), UploadPictureActivity.class));
             }
         });
 

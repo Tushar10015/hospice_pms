@@ -68,7 +68,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
         initializeSpinner();
-
+        setSignup();
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +99,7 @@ public class SignupActivity extends AppCompatActivity {
 
         String[] ageList = new String[100];
         ageList[0] = "Select Age";
+
         for (int i = 1; i < 100; i++) {
             ageList[i] = i + "";
         }
@@ -144,6 +145,19 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
+    private void setSignup() {
+
+        _nameText.setText("Md. Saniul Aual Tushar");
+        _usernameText.setText("Tushar");
+        _emailText.setText("saniultushar@gmail.com");
+        _mobileText.setText("01748702672");
+        _genderSpinner.setSelection(1);
+        _ageSpinner.setSelection(1);
+        _passwordText.setText("123456");
+        _reEnterPasswordText.setText("123456");
+
+    }
+
 
     public void signup() throws JSONException {
         Log.d(TAG, "Signup");
@@ -153,7 +167,7 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-          _signupButton.setEnabled(false);
+        _signupButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -168,14 +182,16 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
-        Profile profile=new Profile();
+        Profile profile = new Profile();
         profile.setName(name);
         profile.setUsername(username);
         profile.setEmail(email);
         profile.setMobile(mobile);
         profile.setPassword(password);
+        profile.setGender(gender);
+        profile.setAge(age);
 
-      final List<Profile> list = new ArrayList<>();
+        final List<Profile> list = new ArrayList<>();
         list.add(profile);
 
         JSONObject postBody = new JSONObject();
@@ -203,7 +219,7 @@ public class SignupActivity extends AppCompatActivity {
                                 JSONObject json = new JSONObject(serverResponse);
                                 int success = json.getInt("success");
                                 if (success == 1) {
-                                    ProfileRepository.insert(getApplicationContext(),list);
+                                    ProfileRepository.insert(getApplicationContext(), list);
                                     onSignupSuccess();
                                     progressDialog.dismiss();
                                 } else {
@@ -229,7 +245,7 @@ public class SignupActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             Log.d(TAG, " onFail");
                         }
-                        });
+                    });
 
                 }
             });
@@ -257,7 +273,7 @@ public class SignupActivity extends AppCompatActivity {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         startActivity(new Intent(this, MainActivity.class));
-          finish();
+        finish();
     }
 
     public void onSignupFailed() {

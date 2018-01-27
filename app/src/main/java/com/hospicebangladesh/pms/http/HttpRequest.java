@@ -1,9 +1,12 @@
 package com.hospicebangladesh.pms.http;
 
 import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -17,7 +20,7 @@ public class HttpRequest {
     private static final String TAG = "HttpRequest";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static void postRequest(String postUrl, String postBody,final HttpRequestCallBack httpRequestCallBack) throws IOException {
+    public static void postRequest(String postUrl, String postBody, final HttpRequestCallBack httpRequestCallBack) throws IOException {
 
         OkHttpClient client = new OkHttpClient();
 
@@ -46,7 +49,7 @@ public class HttpRequest {
     }
 
 
-    public static  void getRequest(String getUrl) throws IOException {
+    public static void getRequest(String getUrl, final HttpRequestCallBack httpRequestCallBack) throws IOException {
 
         OkHttpClient client = new OkHttpClient();
 
@@ -64,34 +67,17 @@ public class HttpRequest {
             @Override
             public void onFailure(Call call, IOException e) {
                 call.cancel();
+                httpRequestCallBack.onFail();
+                Log.d(TAG, " onFailure");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                final String myResponse = response.body().string();
 
-                try {
+                Log.d(TAG, " onResponse");
+                httpRequestCallBack.onSuccess(response);
 
-                    JSONObject json = new JSONObject(myResponse);
-                    //   txtString.setText("First Name: "+json.getJSONObject("data").getString("first_name") + "\nLast Name: " + json.getJSONObject("data").getString("last_name"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            /*    SignupActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-
-                            JSONObject json = new JSONObject(myResponse);
-                            //   txtString.setText("First Name: "+json.getJSONObject("data").getString("first_name") + "\nLast Name: " + json.getJSONObject("data").getString("last_name"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });*/
 
             }
         });

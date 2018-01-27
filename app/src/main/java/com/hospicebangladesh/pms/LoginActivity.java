@@ -46,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        setAuth();
+
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,6 +79,13 @@ public class LoginActivity extends AppCompatActivity {
         splash.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         splash.setSplashImage(getResources().getDrawable(R.drawable.default_splash_image));
         splash.perform();
+
+    }
+
+    private void setAuth(){
+
+        _mobileText.setText("01748702672");
+        _passwordText.setText("123456");
 
     }
 
@@ -190,8 +199,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+
         startActivity(new Intent(this, MainActivity.class));
-         finish();
+        finish();
     }
 
     public void onLoginFailed() {

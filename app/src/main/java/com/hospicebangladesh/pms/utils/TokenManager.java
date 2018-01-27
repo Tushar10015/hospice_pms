@@ -1,4 +1,4 @@
-package bd.org.dnet.scheduler.utils;
+package com.hospicebangladesh.pms.utils;
 
 import android.content.Context;
 

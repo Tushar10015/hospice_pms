@@ -50,7 +50,7 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonPatientProfile"
+                        android:id="@+id/buttonProfile"
                         android:drawableTop="@mipmap/ic_launcher"
                         android:background="@drawable/custom_button"
                         android:text="Patient Profile"

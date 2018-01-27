@@ -3,9 +3,12 @@ package com.hospicebangladesh.pms;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,9 +36,7 @@ import okhttp3.Response;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity";
-    public String signupPostUrl = "http://2aitbd.com/pms/api/signup.php";
-
-    String gender = null, age = null;
+    public String profileUpdatePostUrl = "http://2aitbd.com/pms/api/profile_update.php";
 
 
     @Bind(R.id.input_name)
@@ -63,13 +64,25 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        _mobileText.setEnabled(false);
 
-       List<Profile> profileList= ProfileRepository.getAll(getApplicationContext());
+        List<Profile> profileList = ProfileRepository.getAll(getApplicationContext());
 
-       for (Profile profile:profileList){
-       String name= profile.getName();
-       _nameText.setText(name);
-       }
+        for (Profile profile : profileList) {
+
+            _nameText.setText(profile.getName());
+            _usernameText.setText(profile.getUsername());
+            _mobileText.setText(profile.getMobile());
+            _emailText.setText(profile.getEmail());
+            _passwordText.setText(profile.getPassword());
+            _reEnterPasswordText.setText(profile.getPassword());
+
+            profile.getGender();
+            profile.getAge();
+        }
+
+
         initializeSpinner();
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
@@ -102,19 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         _genderSpinner.setAdapter(adapterGender);
 
-        _genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                gender = (String) parent.getItemAtPosition(position);
-                Log.v(TAG, " Gender " + gender);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
         ArrayAdapter<String> adapterAge = new ArrayAdapter<String>(this,
@@ -122,19 +123,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         _ageSpinner.setAdapter(adapterAge);
 
-        _ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                age = (String) parent.getItemAtPosition(position);
-                Log.v(TAG, " Age " + age);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
     }
 
@@ -143,16 +131,16 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d(TAG, "Signup");
 
         if (!validate()) {
-            onSignupFailed();
+            onSignupFailed("Validation Failed");
             return;
         }
 
-          _signupButton.setEnabled(false);
+        _signupButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
+        progressDialog.setMessage("Updating Account...");
         progressDialog.show();
 
         String name = _nameText.getText().toString();
@@ -161,7 +149,8 @@ public class ProfileActivity extends AppCompatActivity {
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
-
+        String gender = _genderSpinner.getSelectedItem().toString();
+        String age = _ageSpinner.getSelectedItem().toString();
 
         JSONObject postBody = new JSONObject();
         postBody.put("name", name);
@@ -174,7 +163,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         try {
-            HttpRequest.postRequest(signupPostUrl, postBody.toString(), new HttpRequestCallBack() {
+            HttpRequest.postRequest(profileUpdatePostUrl, postBody.toString(), new HttpRequestCallBack() {
                 @Override
                 public void onSuccess(Response response) throws IOException {
 
@@ -187,11 +176,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 JSONObject json = new JSONObject(serverResponse);
                                 int success = json.getInt("success");
+                                String message = json.getString("message");
                                 if (success == 1) {
-                                    onSignupSuccess();
+                                    onSignupSuccess(message);
                                     progressDialog.dismiss();
                                 } else {
-                                    onSignupFailed();
+                                    onSignupFailed(message);
                                     progressDialog.dismiss();
                                 }
 
@@ -213,7 +203,7 @@ public class ProfileActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             Log.d(TAG, " onFail");
                         }
-                        });
+                    });
 
                 }
             });
@@ -221,32 +211,17 @@ public class ProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
- /*new android.os.Handler().postDelayed(
-                new Runnable() {
-        public void run() {
-            // On complete call either onSignupSuccess or onSignupFailed
-            // depending on success
-            onSignupSuccess();
-            // onSignupFailed();
-            progressDialog.dismiss();
-        }
-    }, 3000);*/
-
-
     }
 
 
-    public void onSignupSuccess() {
+    public void onSignupSuccess(String message) {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
-        startActivity(new Intent(this, MainActivity.class));
-          finish();
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
     }
 
-    public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Signup failed", Toast.LENGTH_LONG).show();
-
+    public void onSignupFailed(String message) {
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
         _signupButton.setEnabled(true);
     }
 
@@ -304,5 +279,32 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
