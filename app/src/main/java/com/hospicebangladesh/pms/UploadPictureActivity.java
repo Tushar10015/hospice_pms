@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.hospicebangladesh.pms.utils.Session;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -139,7 +141,9 @@ public class UploadPictureActivity extends AppCompatActivity {
 
 
         OkHttpClient client = new OkHttpClient();
+        MediaType textPlainMT = MediaType.parse("text/plain; charset=utf-8");
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("user_id", Session.getPreference(getApplicationContext(),Session.user_id))
                 .addFormDataPart("file", imageName, RequestBody.create(MEDIA_TYPE_PNG, image))
                 .build();
 

@@ -248,6 +248,9 @@ public class ProfileActivity extends AppCompatActivity {
         String age = _ageSpinner.getSelectedItem().toString();
 
         JSONObject postBody = new JSONObject();
+
+        String user_id=   Session.getPreference(getApplicationContext(),Session.user_id);
+        postBody.put("user_id", user_id);
         postBody.put("name", name);
         postBody.put("username", username);
         postBody.put("email", email);

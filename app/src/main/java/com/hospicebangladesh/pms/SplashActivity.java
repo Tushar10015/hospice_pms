@@ -16,13 +16,13 @@ public class SplashActivity extends AppCompatActivity {
 
 
       /* Set custom color of background: */
-     //   splash.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+      //  splash.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
        /* Set custom image for background:*/
      //   splash.setBackgroundImage(getResources().getDrawable(R.drawable.default_splash_image));
 
         /*Set custom image for splash:*/
-     //   splash.setSplashImage(getResources().getDrawable(R.drawable.default_splash_image));
+       // splash.setSplashImage(getResources().getDrawable(R.drawable.test2));
 
        /* Set custom color of splash image:*/
       //  splash.setSplashImageColor(getResources().getColor(R.color.blue));

@@ -70,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
         initializeSpinner();
-        setSignup();
+      //  setSignup();
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,9 +220,10 @@ public class SignupActivity extends AppCompatActivity {
 
                                 JSONObject json = new JSONObject(serverResponse);
                                 int success = json.getInt("success");
-                                int insertid = json.getInt("insertid");
+
                                 if (success == 1) {
                                 //    ProfileRepository.insert(getApplicationContext(), list);
+                                    int insertid = json.getInt("insertid");
                                     onSignupSuccess(insertid);
                                     progressDialog.dismiss();
                                 } else {
@@ -285,7 +286,6 @@ public class SignupActivity extends AppCompatActivity {
 
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Signup failed", Toast.LENGTH_LONG).show();
-
         _signupButton.setEnabled(true);
     }
 

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.hospicebangladesh.pms.http.HttpRequest;
 import com.hospicebangladesh.pms.http.HttpRequestCallBack;
+import com.hospicebangladesh.pms.utils.Session;
 
 
 import org.json.JSONException;
@@ -109,6 +110,7 @@ public class FollowupActivity extends AppCompatActivity {
 
 
         JSONObject postBody = new JSONObject();
+        postBody.put("user_id", Session.getPreference(getApplicationContext(),Session.user_id));
         postBody.put("bp", bp);
         postBody.put("pulse", pulse);
         postBody.put("o2_saturation", o2_saturation);
@@ -212,7 +214,7 @@ public class FollowupActivity extends AppCompatActivity {
             _input_pulse.setError(null);
         }
 
-        if (o2_saturation.isEmpty()) {
+       /* if (o2_saturation.isEmpty()) {
             _input_o2_saturation.setError("Enter Valid O2 Saturation");
             valid = false;
         } else {
@@ -263,7 +265,7 @@ public class FollowupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _input_further_complication.setError(null);
-        }
+        }*/
 
 
         return valid;

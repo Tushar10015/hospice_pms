@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        setAuth();
+       // setAuth();
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -77,11 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        Splash.Builder splash = new Splash.Builder(this, getSupportActionBar());
-            /* Set custom color of background: */
-        splash.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        splash.setSplashImage(getResources().getDrawable(R.drawable.default_splash_image));
-        splash.perform();
+
 
     }
 
