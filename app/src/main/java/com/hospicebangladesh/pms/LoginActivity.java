@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-       // setAuth();
+        setAuth();
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 

@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity
     @Bind(R.id.buttonUploadPicture)
     Button _buttonUploadPicture;
 
+    @Bind(R.id.buttonInvestigation)
+    Button _buttonInvestigation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), UploadPictureActivity.class));
+            }
+        });
+
+
+        _buttonInvestigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), InvestigationActivity.class));
             }
         });
 
