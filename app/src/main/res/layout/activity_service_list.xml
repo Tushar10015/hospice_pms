@@ -5,33 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.hospicebangladesh.pms.MainActivity"
+    tools:context="com.hospicebangladesh.pms.ServiceListActivity"
     tools:showIn="@layout/app_bar_main"
     android:orientation="vertical"
-    android:weightSum="3"
+
     >
-
-
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
         >
 
         <TableLayout
@@ -50,10 +34,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonProfile"
+                        android:id="@+id/buttonDoctorVisit"
                         android:drawableTop="@mipmap/ic_launcher"
                         android:background="@drawable/custom_button"
-                        android:text="Patient Profile"
+                        android:text="Doctor Visit"
                         android:textSize="14sp"
                         android:gravity="center|bottom"
                         android:singleLine="false"
@@ -68,10 +52,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonPrescription"
+                        android:id="@+id/buttonNursingSupport"
                         android:drawableTop="@mipmap/ic_launcher"
                         android:background="@drawable/custom_button"
-                        android:text="Prescription"
+                        android:text="Nursing Support "
                         android:textSize="14sp"
                         android:gravity="center|bottom"
                         android:singleLine="false"
@@ -93,10 +77,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonInvestigation"
+                        android:id="@+id/buttonInstrumentRent"
                         android:drawableTop="@mipmap/ic_launcher"
                         android:background="@drawable/custom_button"
-                        android:text="Investigation"
+                        android:text="Instrument Rent"
                         android:textSize="14sp"
                         android:gravity="center|bottom"
                         android:paddingBottom="10dp"/>
@@ -109,10 +93,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonFollowup"
+                        android:id="@+id/buttonPhysiotherapy"
                         android:drawableTop="@mipmap/ic_launcher"
                         android:background="@drawable/custom_button"
-                        android:text="Followup"
+                        android:text="Physiotherapy"
                         android:textSize="14sp"
                         android:gravity="center|bottom"
                         android:paddingBottom="10dp"/>
@@ -132,10 +116,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonServices"
+                        android:id="@+id/buttonNutritionist"
                         android:drawableTop="@mipmap/ic_launcher"
-                     android:background="@drawable/custom_button"
-                        android:text="Services"
+                        android:background="@drawable/custom_button"
+                        android:text="Nutritionist"
                         android:textSize="14sp"
                         android:gravity="center|bottom"
                         android:paddingBottom="10dp"/>
@@ -148,10 +132,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonUploadPicture"
+                        android:id="@+id/buttonAmbulance"
                         android:drawableTop="@mipmap/ic_launcher"
                         android:background="@drawable/custom_button"
-                        android:text="Upload Picture"
+                        android:text="Ambulance"
                         android:textSize="14sp"
                         android:gravity="center|bottom"
                         android:paddingBottom="10dp"/>
@@ -160,44 +144,7 @@
             </TableRow>
 
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:weightSum="1"
-                android:layout_weight="0.5">
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5">
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/buttonFollowupReport"
-                        android:drawableTop="@mipmap/ic_launcher"
-                        android:background="@drawable/custom_button"
-                        android:text="Followup Report"
-                        android:textSize="14sp"
-                        android:gravity="center|bottom"
-                        android:paddingBottom="10dp"/>
 
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5">
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/buttonChat"
-                        android:drawableTop="@mipmap/ic_launcher"
-                        android:background="@drawable/custom_button"
-                        android:text="Chat"
-                        android:textSize="14sp"
-                        android:gravity="center|bottom"
-                        android:paddingBottom="10dp"/>
-
-                </RelativeLayout>
-            </TableRow>
 
         </TableLayout>
 

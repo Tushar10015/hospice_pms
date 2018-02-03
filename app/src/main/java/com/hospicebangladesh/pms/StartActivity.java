@@ -21,7 +21,7 @@ public class StartActivity extends AppCompatActivity {
                 //.withBackgroundResource(android.R.color.holo_green_dark)
                 .withBackgroundResource(android.R.color.background_light)
                 //.withHeaderText("Header")
-                .withFooterText("Copyright 2018")
+               // .withFooterText("Copyright 2018")
               //  .withBeforeLogoText("Hospice Bangladesh LTD")
                 .withLogo(R.drawable.hoslogo)
               //  .withAfterLogoText("Hospice Bangladesh LTD")

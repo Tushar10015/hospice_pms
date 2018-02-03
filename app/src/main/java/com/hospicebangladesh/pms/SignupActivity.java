@@ -70,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
         initializeSpinner();
-      //  setSignup();
+        setSignup();
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
