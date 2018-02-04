@@ -24,6 +24,7 @@ import com.hospicebangladesh.pms.model.Medicine;
 import com.hospicebangladesh.pms.model.Profile;
 import com.hospicebangladesh.pms.repo.ProfileRepository;
 import com.hospicebangladesh.pms.utils.Session;
+import com.satsuware.usefulviews.LabelledSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,11 +38,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Response;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener {
 
     private static final String TAG = "ProfileActivity";
     public String profileUpdatePostUrl = "http://2aitbd.com/pms/api/profile_update.php";
     public String profileGetPostUrl = "http://2aitbd.com/pms/api/get_profile.php";
+
+    String gender = null, age = null;
 
     @Bind(R.id.input_name)
     EditText _nameText;
@@ -52,9 +55,9 @@ public class ProfileActivity extends AppCompatActivity {
     @Bind(R.id.input_mobile)
     EditText _mobileText;
     @Bind(R.id.input_age)
-    Spinner _ageSpinner;
+    LabelledSpinner _ageSpinner;
     @Bind(R.id.input_gender)
-    Spinner _genderSpinner;
+    LabelledSpinner _genderSpinner;
     @Bind(R.id.input_password)
     EditText _passwordText;
     @Bind(R.id.input_reEnterPassword)
@@ -111,26 +114,18 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void initializeSpinner() {
 
-        String[] genderList = new String[]{"Select Gender", "Male", "Female"};
+        String[] genderList = new String[]{ "Male", "Female"};
 
         String[] ageList = new String[100];
-        ageList[0] = "Select Age";
-        for (int i = 1; i < 100; i++) {
-            ageList[i] = i + "";
+        for (int i = 0; i < 100; i++) {
+            ageList[i] = (i+1) + "";
         }
 
-        ArrayAdapter<String> adapterGender = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, genderList);
+        _genderSpinner.setItemsArray(genderList);
+        _genderSpinner.setOnItemChosenListener(this);
 
-        _genderSpinner.setAdapter(adapterGender);
-
-
-
-
-        ArrayAdapter<String> adapterAge = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, ageList);
-
-        _ageSpinner.setAdapter(adapterAge);
+        _ageSpinner.setItemsArray(ageList);
+        _ageSpinner.setOnItemChosenListener(this);
 
 
     }
@@ -177,12 +172,21 @@ public class ProfileActivity extends AppCompatActivity {
                                         String age = objProfiles.getString("age");
 
 
+
                                         _nameText.setText(name);
                                         _usernameText.setText(user_name);
                                         _mobileText.setText(phone);
                                         _emailText.setText(email);
                                         _passwordText.setText(password);
                                         _reEnterPasswordText.setText(password);
+
+                                        if(gender.equals("Male")){
+                                            _genderSpinner.setSelection(0);
+                                        }else{
+                                            _genderSpinner.setSelection(1);
+                                        }
+
+                                        _ageSpinner.setSelection((Integer.parseInt(age)-1));
 
                                     }
                                     progressDialog.dismiss();
@@ -244,8 +248,7 @@ public class ProfileActivity extends AppCompatActivity {
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
-        String gender = _genderSpinner.getSelectedItem().toString();
-        String age = _ageSpinner.getSelectedItem().toString();
+
 
         JSONObject postBody = new JSONObject();
 
@@ -404,5 +407,23 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemChosen(View labelledSpinner, AdapterView<?> adapterView, View itemView, int position, long id) {
+        switch (labelledSpinner.getId()) {
+            case R.id.input_gender:
+                gender = (String) adapterView.getItemAtPosition(position);
+                break;
+            case R.id.input_age:
+                age = (String) adapterView.getItemAtPosition(position);
+                break;
+
+        }
+    }
+
+    @Override
+    public void onNothingChosen(View labelledSpinner, AdapterView<?> adapterView) {
+
     }
 }

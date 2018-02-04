@@ -44,4 +44,8 @@ dependencies {
     compile 'com.squareup.sqlbrite:sqlbrite:1.0.0'
 
     compile 'gr.pantrif:easy-android-splash-screen:0.0.1'
+
+    compile 'com.satsuware.lib:usefulviews:2.3.6'
+
+
 }

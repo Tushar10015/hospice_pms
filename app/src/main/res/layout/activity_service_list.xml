@@ -144,6 +144,44 @@
             </TableRow>
 
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="1"
+                android:layout_weight="0.5">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/buttonTest1"
+                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@drawable/custom_button"
+                        android:text="Test1"
+                        android:textSize="14sp"
+                        android:gravity="center|bottom"
+                        android:paddingBottom="10dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/buttonTest2"
+                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@drawable/custom_button"
+                        android:text="Test2"
+                        android:textSize="14sp"
+                        android:gravity="center|bottom"
+                        android:paddingBottom="10dp"/>
+
+                </RelativeLayout>
+            </TableRow>
 
 
         </TableLayout>

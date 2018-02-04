@@ -29,6 +29,37 @@
                 android:layout_marginBottom="24dp"
                 android:layout_gravity="center_horizontal" />
 
+
+
+            <!-- Date Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/input_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:focusable="false"
+                    android:hint="Date Picker" />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <!-- Time Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/input_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:focusable="false"
+                    android:hint="Time Picker" />
+            </android.support.design.widget.TextInputLayout>
             <!-- BP Label -->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

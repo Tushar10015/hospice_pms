@@ -1,9 +1,14 @@
 package com.hospicebangladesh.pms;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
@@ -11,8 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.hospicebangladesh.pms.http.HttpRequest;
@@ -24,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.Bind;
@@ -35,6 +43,10 @@ public class FollowupActivity extends AppCompatActivity {
     private static final String TAG = "FollowupActivity";
     public String profileUpdatePostUrl = "http://2aitbd.com/pms/api/followup.php";
 
+   /* @Bind(R.id.input_date)
+    public EditText _input_date;
+    @Bind(R.id.input_time)
+    public EditText _input_time;*/
 
     @Bind(R.id.input_bp)
     EditText _input_bp;
@@ -56,17 +68,20 @@ public class FollowupActivity extends AppCompatActivity {
     EditText _input_further_complication;
 
 
-
     @Bind(R.id.btn_followup)
     Button _btn_followup;
 
-
+   static EditText _input_date;
+   static EditText _input_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_followup);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+         _input_date = (EditText) findViewById(R.id.input_date);
+         _input_time = (EditText) findViewById(R.id.input_time);
 
         _btn_followup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +93,77 @@ public class FollowupActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        _input_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(v);
+            }
+        });
+
+
+        _input_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialog(v);
+            }
+        });
+
+    }
+
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+            _input_time.setText(hourOfDay + ":" + minute);
+        }
+    }
+
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
+            _input_date.setText(year + "-" + month + "-" + day);
+        }
     }
 
     public void followup() throws JSONException {
@@ -108,9 +194,8 @@ public class FollowupActivity extends AppCompatActivity {
         String further_complication = _input_further_complication.getText().toString();
 
 
-
         JSONObject postBody = new JSONObject();
-        postBody.put("user_id", Session.getPreference(getApplicationContext(),Session.user_id));
+        postBody.put("user_id", Session.getPreference(getApplicationContext(), Session.user_id));
         postBody.put("bp", bp);
         postBody.put("pulse", pulse);
         postBody.put("o2_saturation", o2_saturation);

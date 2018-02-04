@@ -21,6 +21,7 @@ import com.hospicebangladesh.pms.model.Profile;
 import com.hospicebangladesh.pms.repo.ProfileRepository;
 import com.hospicebangladesh.pms.utils.Session;
 import com.hospicebangladesh.pms.utils.SessionManager;
+import com.satsuware.usefulviews.LabelledSpinner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Response;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener {
 
     private static final String TAG = "SignupActivity";
     public String signupPostUrl = "http://2aitbd.com/pms/api/signup.php";
@@ -50,9 +51,9 @@ public class SignupActivity extends AppCompatActivity {
     @Bind(R.id.input_mobile)
     EditText _mobileText;
     @Bind(R.id.input_age)
-    Spinner _ageSpinner;
+    LabelledSpinner _ageSpinner;
     @Bind(R.id.input_gender)
-    Spinner _genderSpinner;
+    LabelledSpinner _genderSpinner;
     @Bind(R.id.input_password)
     EditText _passwordText;
     @Bind(R.id.input_reEnterPassword)
@@ -67,7 +68,6 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
-
 
         initializeSpinner();
         setSignup();
@@ -95,55 +95,27 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
+
     public void initializeSpinner() {
 
-        String[] genderList = new String[]{"Select Gender", "Male", "Female"};
+        String[] genderList = new String[]{ "Male", "Female"};
 
         String[] ageList = new String[100];
-        ageList[0] = "Select Age";
 
-        for (int i = 1; i < 100; i++) {
-            ageList[i] = i + "";
+
+        for (int i = 0; i < 100; i++) {
+            ageList[i] = (i+1) + "";
         }
 
-        ArrayAdapter<String> adapterGender = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, genderList);
+        _genderSpinner.setItemsArray(genderList);
+        _genderSpinner.setOnItemChosenListener(this);
 
-        _genderSpinner.setAdapter(adapterGender);
-
-        _genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                gender = (String) parent.getItemAtPosition(position);
-                Log.v(TAG, " Gender " + gender);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        ArrayAdapter<String> adapterAge = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, ageList);
-
-        _ageSpinner.setAdapter(adapterAge);
-
-        _ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                age = (String) parent.getItemAtPosition(position);
-                Log.v(TAG, " Age " + age);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        _ageSpinner.setItemsArray(ageList);
+        _ageSpinner.setOnItemChosenListener(this);
 
     }
 
@@ -343,5 +315,23 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    @Override
+    public void onItemChosen(View labelledSpinner, AdapterView<?> adapterView, View itemView, int position, long id) {
+        switch (labelledSpinner.getId()) {
+            case R.id.input_gender:
+                gender = (String) adapterView.getItemAtPosition(position);
+                break;
+            case R.id.input_age:
+                age = (String) adapterView.getItemAtPosition(position);
+                break;
+
+        }
+    }
+
+    @Override
+    public void onNothingChosen(View labelledSpinner, AdapterView<?> adapterView) {
+
     }
 }
