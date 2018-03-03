@@ -147,7 +147,7 @@ public class UploadPictureActivity extends AppCompatActivity {
                 .addFormDataPart("file", imageName, RequestBody.create(MEDIA_TYPE_PNG, image))
                 .build();
 
-        Request request = new Request.Builder().url("http://2aitbd.com/pms/api/upload_picture.php")
+        Request request = new Request.Builder().url("http://103.16.75.42/pms/api/upload_picture.php")
                 .post(requestBody).build();
 
 
@@ -209,7 +209,8 @@ public class UploadPictureActivity extends AppCompatActivity {
 
             //Convert bitmap to byte array
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 800, 800, true);
+            resized.compress(Bitmap.CompressFormat.PNG, 0, bos);
             byte[] bitmapdata = bos.toByteArray();
 
             //write the bytes in file
@@ -251,7 +252,8 @@ public class UploadPictureActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             return true;
         }
 

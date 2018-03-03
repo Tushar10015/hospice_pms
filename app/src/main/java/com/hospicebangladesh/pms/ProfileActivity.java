@@ -41,15 +41,14 @@ import okhttp3.Response;
 public class ProfileActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener {
 
     private static final String TAG = "ProfileActivity";
-    public String profileUpdatePostUrl = "http://2aitbd.com/pms/api/profile_update.php";
-    public String profileGetPostUrl = "http://2aitbd.com/pms/api/get_profile.php";
+    public String profileUpdatePostUrl = "profile_update.php";
+    public String profileGetPostUrl = "get_profile.php";
 
     String gender = null, age = null;
 
     @Bind(R.id.input_name)
     EditText _nameText;
-    @Bind(R.id.input_username)
-    EditText _usernameText;
+
     @Bind(R.id.input_email)
     EditText _emailText;
     @Bind(R.id.input_mobile)
@@ -58,6 +57,10 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
     LabelledSpinner _ageSpinner;
     @Bind(R.id.input_gender)
     LabelledSpinner _genderSpinner;
+
+    @Bind(R.id.input_address)
+    EditText _addressText;
+
     @Bind(R.id.input_password)
     EditText _passwordText;
     @Bind(R.id.input_reEnterPassword)
@@ -79,7 +82,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         for (Profile profile : profileList) {
 
             _nameText.setText(profile.getName());
-            _usernameText.setText(profile.getUsername());
+
             _mobileText.setText(profile.getMobile());
             _emailText.setText(profile.getEmail());
             _passwordText.setText(profile.getPassword());
@@ -114,11 +117,11 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
 
     public void initializeSpinner() {
 
-        String[] genderList = new String[]{ "Male", "Female"};
+        String[] genderList = new String[]{"Male", "Female"};
 
         String[] ageList = new String[100];
         for (int i = 0; i < 100; i++) {
-            ageList[i] = (i+1) + "";
+            ageList[i] = (i + 1) + "";
         }
 
         _genderSpinner.setItemsArray(genderList);
@@ -138,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         progressDialog.setMessage("Updating Account...");
         progressDialog.show();
 
-     String user_id=   Session.getPreference(getApplicationContext(),Session.user_id);
+        String user_id = Session.getPreference(getApplicationContext(), Session.user_id);
 
         JSONObject postBody = new JSONObject();
         postBody.put("user_id", user_id);
@@ -164,29 +167,32 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
                                         JSONObject objProfiles = jsonArrayProfiles.getJSONObject(i);
 
                                         String name = objProfiles.getString("name");
-                                        String user_name = objProfiles.getString("user_name");
                                         String password = objProfiles.getString("password");
                                         String phone = objProfiles.getString("phone");
                                         String email = objProfiles.getString("email");
                                         String gender = objProfiles.getString("gender");
                                         String age = objProfiles.getString("age");
+                                        String address = objProfiles.getString("address");
 
 
+                                        Session.savePreference(getApplicationContext(), Session.name, name);
 
                                         _nameText.setText(name);
-                                        _usernameText.setText(user_name);
+
                                         _mobileText.setText(phone);
                                         _emailText.setText(email);
                                         _passwordText.setText(password);
                                         _reEnterPasswordText.setText(password);
+                                        _addressText.setText(address);
 
-                                        if(gender.equals("Male")){
+
+                                        if (gender.equals("Male")) {
                                             _genderSpinner.setSelection(0);
-                                        }else{
+                                        } else {
                                             _genderSpinner.setSelection(1);
                                         }
 
-                                        _ageSpinner.setSelection((Integer.parseInt(age)-1));
+                                        _ageSpinner.setSelection((Integer.parseInt(age) - 1));
 
                                     }
                                     progressDialog.dismiss();
@@ -222,8 +228,6 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         }
 
 
-
-
     }
 
     public void signup() throws JSONException {
@@ -242,26 +246,25 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         progressDialog.setMessage("Updating Account...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String username = _usernameText.getText().toString();
+        final String name = _nameText.getText().toString();
+
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
-
+        String address = _addressText.getText().toString();
 
         JSONObject postBody = new JSONObject();
 
-        String user_id=   Session.getPreference(getApplicationContext(),Session.user_id);
+        String user_id = Session.getPreference(getApplicationContext(), Session.user_id);
         postBody.put("user_id", user_id);
         postBody.put("name", name);
-        postBody.put("username", username);
         postBody.put("email", email);
         postBody.put("mobile", mobile);
         postBody.put("password", password);
         postBody.put("gender", gender);
         postBody.put("age", age);
-
+        postBody.put("address", address);
 
         try {
             HttpRequest.postRequest(profileUpdatePostUrl, postBody.toString(), new HttpRequestCallBack() {
@@ -280,6 +283,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
                                 String message = json.getString("message");
                                 if (success == 1) {
                                     onSignupSuccess(message);
+                                    Session.savePreference(getApplicationContext(), Session.name, name);
                                     progressDialog.dismiss();
                                 } else {
                                     onSignupFailed(message);
@@ -330,7 +334,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         boolean valid = true;
 
         String name = _nameText.getText().toString();
-        String username = _usernameText.getText().toString();
+
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
@@ -341,13 +345,6 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
             valid = false;
         } else {
             _nameText.setError(null);
-        }
-
-        if (username.isEmpty()) {
-            _usernameText.setError("Enter Valid Username");
-            valid = false;
-        } else {
-            _usernameText.setError(null);
         }
 
 
@@ -397,7 +394,9 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            Session.clearPreference(getApplicationContext());
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             return true;
         }
 

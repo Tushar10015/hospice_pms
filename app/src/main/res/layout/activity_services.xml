@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ls="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBackground"
     tools:context="com.hospicebangladesh.pms.ServicesActivity">
 
     <ScrollView
@@ -14,45 +15,128 @@
         android:fitsSystemWindows="true">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/parentView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="56dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
-            android:focusable="true" android:focusableInTouchMode="true"
-            >
+            android:paddingTop="56dp">
 
-            <ImageView android:src="@mipmap/ic_launcher"
-                android:layout_width="wrap_content"
-                android:layout_height="72dp"
-                android:layout_marginBottom="24dp"
-                android:layout_gravity="center_horizontal" />
+            <!-- Service -->
+            <TextView
+                android:id="@+id/textViewStoreCare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic" />
 
-            <!-- gender -->
+
+
+            <com.satsuware.usefulviews.LabelledSpinner
+                android:id="@+id/input_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ls:labelText="Type"
+                ls:widgetColor="#ffffff"
+
+                />
+
+            <!-- Date Label -->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <Spinner android:id="@+id/input_services"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:focusable="false"
+                    android:hint="From Date"
+                    android:inputType="date" />
             </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Date Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="To Date"
+                    android:inputType="date"
+                     />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Date Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint=""
+                    android:inputType="date" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Time Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint=""
+                    android:inputType="time" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <com.satsuware.usefulviews.LabelledSpinner
+                android:id="@+id/input_time_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ls:labelText="Time"
+                ls:widgetColor="#ffffff"
+
+
+                />
 
 
             <!-- mobile number -->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_mobile"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="Mobile Number" />
+                    android:hint="Mobile Number"
+                    android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -60,13 +144,15 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_address"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress"
-                    android:hint="Address" />
+                    android:hint="Address"
+                    android:inputType="textPostalAddress" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -74,28 +160,41 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_note"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Note" />
+                    android:hint="Note"
+                    android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="For any query please contact us on 09666-911604 (9am-5pm, except Friday).\nEmail: hospicebangladesh@gmail.com.\nwww.hospicebangladesh.com"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic" />
+
 
             <!-- Service Button -->
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_service"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
+                android:layout_marginTop="24dp"
                 android:padding="12dp"
-                android:text="Submit"/>
-
+                android:theme="@style/ButtonColor"
+                android:text="Submit" />
 
 
         </LinearLayout>
+
     </ScrollView>
 
 

@@ -39,16 +39,28 @@ public class ServiceListActivity extends AppCompatActivity {
     @Bind(R.id.buttonInstrumentRent)
     Button _buttonInstrumentRent;
 
-    @Bind(R.id.buttonPhysiotherapy)
-    Button _buttonPhysiotherapy;
+    @Bind(R.id.buttonMedicalProcedure)
+    Button _buttonMedicalProcedure;
 
-    @Bind(R.id.buttonNutritionist)
-    Button _buttonNutritionist;
+    @Bind(R.id.buttonAlliedHelthSupport)
+    Button _buttonAlliedHelthSupport;
 
+
+    @Bind(R.id.buttonLabSupport)
+    Button _buttonLabSupport;
 
     @Bind(R.id.buttonAmbulance)
     Button _buttonAmbulance;
 
+    @Bind(R.id.buttonPatientCatering)
+    Button _buttonPatientCatering;
+
+
+    @Bind(R.id.buttonHospiceEstore)
+    Button _buttonHospiceEstore;
+
+    @Bind(R.id.buttonTelecare)
+    Button _buttonTelecare;
 
 
 
@@ -88,7 +100,7 @@ public class ServiceListActivity extends AppCompatActivity {
             }
         });
 
-        _buttonPhysiotherapy.setOnClickListener(new View.OnClickListener() {
+        _buttonMedicalProcedure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
@@ -98,7 +110,7 @@ public class ServiceListActivity extends AppCompatActivity {
         });
 
 
-        _buttonNutritionist.setOnClickListener(new View.OnClickListener() {
+        _buttonAlliedHelthSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
@@ -108,7 +120,7 @@ public class ServiceListActivity extends AppCompatActivity {
         });
 
 
-        _buttonAmbulance.setOnClickListener(new View.OnClickListener() {
+        _buttonLabSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
@@ -118,8 +130,43 @@ public class ServiceListActivity extends AppCompatActivity {
         });
 
 
+        _buttonAmbulance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
+                intent.putExtra("index",6);
+                startActivity(intent);
+            }
+        });
+
+        _buttonPatientCatering.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
+                intent.putExtra("index",7);
+                startActivity(intent);
+            }
+        });
 
 
+        _buttonHospiceEstore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
+                intent.putExtra("index",8);
+                startActivity(intent);
+            }
+        });
+
+
+        _buttonTelecare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
+                intent.putExtra("index",9);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -140,7 +187,9 @@ public class ServiceListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            Session.clearPreference(getApplicationContext());
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             return true;
         }
 

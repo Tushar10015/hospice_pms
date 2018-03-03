@@ -23,6 +23,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
     private List<Medicine> mDataset;
     private Context context;
     private static final String TAG = MedicineAdapter.class.getSimpleName();
+    private int counter=0;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -35,7 +36,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
         public ViewHolder(View v) {
             super(v);
             //  v.setOnClickListener(this);
-            si = v.findViewById(R.id.textViewSI);
+
             medicine = v.findViewById(R.id.textViewMedicine);
             time = v.findViewById(R.id.textViewTime);
             instruction = v.findViewById(R.id.textViewInstruction);
@@ -71,6 +72,8 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
+        counter++;
+
         String medicine =mDataset.get(position).getMedicine();
         String times =mDataset.get(position).getTimes();
         String instruction = mDataset.get(position).getInstruction();
@@ -78,7 +81,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
         String dtime = mDataset.get(position).getDtime();
         Log.d(TAG,medicine);
 
-        holder.medicine.setText(medicine);
+        holder.medicine.setText(counter+".  "+medicine);
         holder.time.setText(times);
         holder.instruction.setText(instruction);
         holder.duration.setText(duration);

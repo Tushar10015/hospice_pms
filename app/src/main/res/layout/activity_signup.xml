@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBackground"
     tools:context="com.hospicebangladesh.pms.SignupActivity">
 
     <ScrollView
@@ -24,17 +24,11 @@
             android:focusable="true" android:focusableInTouchMode="true"
             >
 
-            <ImageView android:src="@mipmap/ic_launcher"
+            <ImageView android:src="@drawable/hoslogo"
                 android:layout_width="wrap_content"
                 android:layout_height="72dp"
                 android:layout_marginBottom="24dp"
                 android:layout_gravity="center_horizontal" />
-
-
-
-
-
-
 
             <!-- Name Label -->
             <android.support.design.widget.TextInputLayout
@@ -46,21 +40,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="Name" />
+                    android:hint="Patient Name" />
             </android.support.design.widget.TextInputLayout>
 
-            <!-- Username Label -->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Username" />
-            </android.support.design.widget.TextInputLayout>
 
 
 
@@ -132,6 +114,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+
+            <!-- Address Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/input_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:hint="Address" />
+            </android.support.design.widget.TextInputLayout>
+
             <!-- Password Label -->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -158,6 +154,12 @@
                     android:hint="Re-enter Password"/>
             </android.support.design.widget.TextInputLayout>
 
+            <CheckBox
+                android:id="@+id/chk_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms and Condition" />
+
             <!-- Signup Button -->
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_signup"
@@ -166,6 +168,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
+                android:theme="@style/ButtonColor"
                 android:text="Create Account"/>
 
             <TextView android:id="@+id/link_login"
@@ -174,6 +177,7 @@
                 android:layout_marginBottom="24dp"
                 android:text="Already a member? Login"
                 android:gravity="center"
+                android:textColor="@color/colorWhite"
                 android:textSize="16dip"/>
 
         </LinearLayout>

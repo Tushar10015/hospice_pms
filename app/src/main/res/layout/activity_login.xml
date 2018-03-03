@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBackground"
     tools:context="com.hospicebangladesh.pms.LoginActivity">
 
 
@@ -23,7 +23,7 @@
             android:focusable="true" android:focusableInTouchMode="true"
             >
 
-            <ImageView android:src="@mipmap/ic_launcher"
+            <ImageView android:src="@drawable/hoslogo"
                 android:layout_width="wrap_content"
                 android:layout_height="72dp"
                 android:layout_marginBottom="24dp"
@@ -75,6 +75,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
+                android:theme="@style/ButtonColor"
                 android:text="Login"/>
 
             <TextView android:id="@+id/link_signup"
@@ -83,6 +84,7 @@
                 android:layout_marginBottom="24dp"
                 android:text="No account yet? Create one"
                 android:gravity="center"
+               android:textColor="@color/colorWhite"
                 android:textSize="16dip"/>
 
         </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBackground"
     tools:context="com.hospicebangladesh.pms.FollowupActivity">
 
     <ScrollView
@@ -23,11 +23,7 @@
             android:focusable="true" android:focusableInTouchMode="true"
             >
 
-            <ImageView android:src="@mipmap/ic_launcher"
-                android:layout_width="wrap_content"
-                android:layout_height="72dp"
-                android:layout_marginBottom="24dp"
-                android:layout_gravity="center_horizontal" />
+
 
 
 
@@ -42,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="date"
                     android:focusable="false"
-                    android:hint="Date Picker" />
+                    android:hint="Date" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -58,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="date"
                     android:focusable="false"
-                    android:hint="Time Picker" />
+                    android:hint="Time" />
             </android.support.design.widget.TextInputLayout>
             <!-- BP Label -->
             <android.support.design.widget.TextInputLayout
@@ -70,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="BP" />
+                    android:hint="BP 120/80 mmHg" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Pulse Label -->
@@ -83,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="Pulse" />
+                    android:hint="Pulse-/Min" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -98,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="O2 Saturation" />
+                    android:hint="O2 Saturation %" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -112,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="Temp" />
+                    android:hint="Temperature °C" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Blood Suger Label -->
@@ -195,6 +191,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
+                android:theme="@style/ButtonColor"
                 android:text="Submit"/>
 
 

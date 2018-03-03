@@ -1,6 +1,7 @@
 package com.hospicebangladesh.pms;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -22,17 +24,25 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.hospicebangladesh.pms.http.HttpRequestCallBack;
+import com.hospicebangladesh.pms.utils.Session;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     private SliderLayout mDemoSlider;
 
-
+    private static final String TAG = "MainActivity";
     @Bind(R.id.buttonProfile)
     Button _buttonProfile;
 
@@ -54,6 +64,9 @@ public class MainActivity extends AppCompatActivity
 
     @Bind(R.id.buttonFollowupReport)
     Button _buttonFollowupReport;
+
+      @Bind(R.id.buttonChat)
+    Button _buttonChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +94,53 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerView = navigationView.getHeaderView(0);
+        TextView headerName = (TextView) headerView.findViewById(R.id.textViewNavName);
+        headerName.setText(Session.getPreference(getApplicationContext(), Session.name));
+
+
+        TextView headerMobile = (TextView) headerView.findViewById(R.id.textViewNavMobile);
+        headerMobile.setText(Session.getPreference(getApplicationContext(), Session.mobile));
 
         startSlider();
 
+        try {
+            CheckPayment payment = new CheckPayment();
+            payment.checkPayment(getApplicationContext(),new HttpRequestCallBack(){
+                @Override
+                public void onSuccess(Response response) throws IOException {
+                    String status = Session.getPreference(getApplicationContext(), "status");
+                    String message = Session.getPreference(getApplicationContext(), "message");
+                    if (status.equals("1")) {
+                        //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), NoPaidActivity.class);
+                        intent.putExtra("message", message);
+                        startActivity(intent);
+                    }
+                }
+
+                @Override
+                public void onFail() {
+                    String status = Session.getPreference(getApplicationContext(), "status");
+                    String message = Session.getPreference(getApplicationContext(), "message");
+                    if (status.equals("1")) {
+                        //  Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), NoPaidActivity.class);
+                        intent.putExtra("message", message);
+                        startActivity(intent);
+                    }
+
+                    Log.d(TAG, " onFail");
+                }
+            });
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         _buttonProfile.setOnClickListener(new View.OnClickListener() {
@@ -138,22 +195,28 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        _buttonChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ChatViewActivity.class));
+            }
+        });
+
 
     }
 
 
+    private void startSlider() {
+        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 
-    private void startSlider(){
-        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
-        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
+        file_maps.put("We connect you with professionals in home care – Knowledge and skills to your doorstep with a warm touch", R.drawable.e);
+        file_maps.put("Team Member", R.drawable.a);
+        file_maps.put("Before I Die I want", R.drawable.b);
+        file_maps.put("Before I Die", R.drawable.c);
+        file_maps.put("Hospice and Palliative care is most appropriate when a patient no longer benefits from curative treatment", R.drawable.d);
 
-        file_maps.put("We connect you with professionals in home care – Knowledge and skills to your doorstep with a warm touch",R.drawable.e);
-        file_maps.put("Team Member",R.drawable.a);
-        file_maps.put("Before I Die I want",R.drawable.b);
-        file_maps.put("Before I Die",R.drawable.c);
-        file_maps.put("Hospice and Palliative care is most appropriate when a patient no longer benefits from curative treatment",R.drawable.d);
-
-        for(String name : file_maps.keySet()){
+        for (String name : file_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
@@ -165,7 +228,7 @@ public class MainActivity extends AppCompatActivity
             //add your extra information
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle()
-                    .putString("extra",name);
+                    .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
         }
@@ -175,8 +238,8 @@ public class MainActivity extends AppCompatActivity
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
 
-      //  mDemoSlider.setPresetTransformer("Default");
-    //    Toast.makeText(MainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+        //  mDemoSlider.setPresetTransformer("Default");
+        //    Toast.makeText(MainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -190,13 +253,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this,slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
 
-
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
 
     @Override
     public void onPageSelected(int position) {
@@ -204,7 +267,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {}
+    public void onPageScrollStateChanged(int state) {
+    }
 
 
     @Override
@@ -232,7 +296,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            Session.clearPreference(getApplicationContext());
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             return true;
         }
 
@@ -245,19 +311,35 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_patient_profile) {
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        } else if (id == R.id.nav_prescription) {
+            startActivity(new Intent(getApplicationContext(), PrescriptionActivity.class));
+        } else if (id == R.id.nav_investigation) {
+            startActivity(new Intent(getApplicationContext(), InvestigationActivity.class));
+        } else if (id == R.id.nav_followup) {
+            startActivity(new Intent(getApplicationContext(), FollowupActivity.class));
+        } else if (id == R.id.nav_services) {
+            startActivity(new Intent(getApplicationContext(), ServiceListActivity.class));
+        } else if (id == R.id.nav_upload_picture) {
+            startActivity(new Intent(getApplicationContext(), UploadPictureActivity.class));
+        } else if (id == R.id.nav_followup_report) {
+            startActivity(new Intent(getApplicationContext(), FollowupReportActivity.class));
+        } else if (id == R.id.nav_chat) {
+            startActivity(new Intent(getApplicationContext(), ChatViewActivity.class));
         }
+
+        else if (id == R.id.nav_share) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://2aitbd.com/"));
+            startActivity(browserIntent);
+        }
+
+        else if (id == R.id.nav_send) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://2aitbd.com/"));
+            startActivity(browserIntent);
+        }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

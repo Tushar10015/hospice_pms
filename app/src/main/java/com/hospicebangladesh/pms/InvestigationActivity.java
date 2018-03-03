@@ -1,6 +1,7 @@
 package com.hospicebangladesh.pms;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -41,8 +42,8 @@ import okhttp3.Response;
 public class InvestigationActivity extends AppCompatActivity {
 
     private static final String TAG = "InvestigationActivity";
-    public String showInvestigationGetUrl = "http://2aitbd.com/pms/api/get_investigation_report.php";
-    public String investigationUpdatePostUrl = "http://2aitbd.com/pms/api/investigation.php";
+    public String showInvestigationGetUrl = "get_investigation_report.php";
+    public String investigationUpdatePostUrl = "investigation.php";
 
     final ArrayList<EditText> editTextArrayList = new ArrayList<>();
     final ArrayList<TextView> textViewArrayList = new ArrayList<>();
@@ -438,7 +439,9 @@ public class InvestigationActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            Session.clearPreference(getApplicationContext());
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             return true;
         }
 

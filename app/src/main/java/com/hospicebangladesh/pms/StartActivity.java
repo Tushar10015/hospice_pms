@@ -19,12 +19,12 @@ public class StartActivity extends AppCompatActivity {
                 .withTargetActivity(LoginActivity.class)
                 .withSplashTimeOut(4000)
                 //.withBackgroundResource(android.R.color.holo_green_dark)
-                .withBackgroundResource(android.R.color.background_light)
+                .withBackgroundResource(R.drawable.second)
                 //.withHeaderText("Header")
-               // .withFooterText("Copyright 2018")
+                .withFooterText("Developed By 2A IT")
               //  .withBeforeLogoText("Hospice Bangladesh LTD")
-                .withLogo(R.drawable.hoslogo)
-              //  .withAfterLogoText("Hospice Bangladesh LTD")
+              //  .withLogo(R.drawable.hoslogo)
+               // .withAfterLogoText("Hospice Bangladesh LTD")
                 .create();
 
         setContentView(easySplashScreenView);

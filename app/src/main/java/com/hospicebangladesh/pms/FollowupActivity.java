@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ import okhttp3.Response;
 public class FollowupActivity extends AppCompatActivity {
 
     private static final String TAG = "FollowupActivity";
-    public String profileUpdatePostUrl = "http://2aitbd.com/pms/api/followup.php";
+    public String profileUpdatePostUrl = "followup.php";
 
    /* @Bind(R.id.input_date)
     public EditText _input_date;
@@ -193,9 +194,13 @@ public class FollowupActivity extends AppCompatActivity {
         String intake_ouput = _input_intake_ouput.getText().toString();
         String further_complication = _input_further_complication.getText().toString();
 
+        String date = _input_date.getText().toString();
+        String time = _input_time.getText().toString();
 
         JSONObject postBody = new JSONObject();
         postBody.put("user_id", Session.getPreference(getApplicationContext(), Session.user_id));
+        postBody.put("date", date);
+        postBody.put("time", time);
         postBody.put("bp", bp);
         postBody.put("pulse", pulse);
         postBody.put("o2_saturation", o2_saturation);
@@ -282,6 +287,25 @@ public class FollowupActivity extends AppCompatActivity {
         String bowel_movement = _input_bowel_movement.getText().toString();
         String intake_ouput = _input_intake_ouput.getText().toString();
         String further_complication = _input_further_complication.getText().toString();
+
+        String date = _input_date.getText().toString();
+        String time = _input_time.getText().toString();
+
+
+        if (date.isEmpty()) {
+            _input_date.setError("Enter Valid Date");
+            valid = false;
+        } else {
+            _input_date.setError(null);
+        }
+
+        if (time.isEmpty()) {
+            _input_time.setError("Enter Valid Time");
+            valid = false;
+        } else {
+            _input_time.setError(null);
+        }
+
 
 
         if (bp.isEmpty()) {
@@ -371,7 +395,8 @@ public class FollowupActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             return true;
         }
 

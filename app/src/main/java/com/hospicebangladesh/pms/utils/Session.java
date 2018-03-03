@@ -18,13 +18,18 @@ public class Session {
     public static final String user_id = "user_id";
     public static final String mobile = "mobile";
     public static final String password = "password";
+    public static final String status = "status";
+    public static final String message = "message";
+
+    public static final String name = "name";
 
 
     public static void savePreference(Context context,SessionManager sessionManager) {
         savePreference(context, user_id, "" + sessionManager.getUserId());
         savePreference(context, mobile, sessionManager.getMobile());
         savePreference(context, password, sessionManager.getPassword());
-
+        savePreference(context, status, sessionManager.getStatus());
+        savePreference(context, message, sessionManager.getMessage());
 
     }
 

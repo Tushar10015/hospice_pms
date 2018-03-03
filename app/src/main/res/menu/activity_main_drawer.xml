@@ -5,42 +5,51 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/nav_patient_profile"
+            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Patient Profile" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_prescription"
+            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Prescription" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_investigation"
+            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Investigation" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:id="@+id/nav_followup"
+            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Followup" />
 
         <item
-            android:id="@+id/nav_gallery2"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_services"
+            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Services" />
         <item
-            android:id="@+id/nav_gallery3"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_upload_picture"
+            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Upload Picture" />
+
+        <item
+            android:id="@+id/nav_followup_report"
+            android:icon="@drawable/ic_forward_black_24dp"
+            android:title="Followup Report" />
+
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_forward_black_24dp"
+            android:title="Chat" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:icon="@drawable/ic_perm_identity_black_24dp"
+                android:title="Developed By 2A IT" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="http://2aitbd.com/" />
         </menu>
     </item>
 

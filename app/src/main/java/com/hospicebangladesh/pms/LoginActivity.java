@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    public String loginPostUrl = "http://2aitbd.com/pms/api/login.php";
+    public String loginPostUrl = "login.php";
     String mobile,password;
     @Bind(R.id.input_mobile)
     EditText _mobileText;
@@ -56,8 +56,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        setAuth();
+     //  setAuth();
 
+        if(Session.getPreference(getApplicationContext(),"mobile")!=null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -134,10 +138,14 @@ public class LoginActivity extends AppCompatActivity {
 
                                 JSONObject json = new JSONObject(serverResponse);
                                 int success = json.getInt("success");
-                                int insertid = json.getInt("insertid");
 
                                 if (success == 1) {
-                                    onLoginSuccess(insertid);
+                                    _loginButton.setEnabled(true);
+                                    String status=json.getString("status");
+                                    String message=json.getString("message");
+                                    int insertid = json.getInt("insertid");
+                                    String name=json.getString("name");
+                                    onLoginSuccess(insertid,name,message);
                                     progressDialog.dismiss();
                                 } else {
                                     onLoginFailed();
@@ -205,11 +213,12 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void onLoginSuccess(int insertid) {
+    public void onLoginSuccess(int insertid,String name,String message) {
         _loginButton.setEnabled(true);
 
         SessionManager sessionManager=new SessionManager(insertid,mobile,password);
         Session.savePreference(getApplicationContext(),sessionManager);
+        Session.savePreference(getApplicationContext(),Session.name,name);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

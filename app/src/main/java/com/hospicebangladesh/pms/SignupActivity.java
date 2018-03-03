@@ -1,8 +1,10 @@
 package com.hospicebangladesh.pms;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,15 +40,14 @@ import okhttp3.Response;
 public class SignupActivity extends AppCompatActivity implements LabelledSpinner.OnItemChosenListener {
 
     private static final String TAG = "SignupActivity";
-    public String signupPostUrl = "http://2aitbd.com/pms/api/signup.php";
+    public String signupPostUrl = "signup.php";
 
     String gender = null, age = null;
 
 
     @Bind(R.id.input_name)
     EditText _nameText;
-    @Bind(R.id.input_username)
-    EditText _usernameText;
+
     @Bind(R.id.input_email)
     EditText _emailText;
     @Bind(R.id.input_mobile)
@@ -54,6 +56,12 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
     LabelledSpinner _ageSpinner;
     @Bind(R.id.input_gender)
     LabelledSpinner _genderSpinner;
+
+    @Bind(R.id.chk_terms)
+    CheckBox _chk_terms;
+    @Bind(R.id.input_address)
+    EditText _addressText;
+
     @Bind(R.id.input_password)
     EditText _passwordText;
     @Bind(R.id.input_reEnterPassword)
@@ -70,7 +78,10 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
         ButterKnife.bind(this);
 
         initializeSpinner();
-        setSignup();
+
+      //  setSignup();
+
+
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,8 +103,41 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
-    }
 
+
+
+
+        _chk_terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(SignupActivity.this).create();
+                    alertDialog.setTitle("Terms and Condition");
+                    alertDialog.setMessage("1.Licence and assignment\n" +
+                            "2.Third Party Applications\n" +
+                            "3.User generated content\n" +
+                            "4.Consideration\n" +
+                            "5.User Guidelines\n" +
+                            "6.Copyright infringement\n" +
+                            "7.Technology limitations and modifications\n" +
+                            "8.Export control");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+                    _chk_terms.setError(null);
+                }
+            }
+        });
+
+
+
+    }
 
 
 
@@ -122,13 +166,13 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
     private void setSignup() {
 
         _nameText.setText("Md. Saniul Aual Tushar");
-        _usernameText.setText("Tushar");
         _emailText.setText("saniultushar@gmail.com");
         _mobileText.setText("01748702672");
         _genderSpinner.setSelection(1);
         _ageSpinner.setSelection(1);
         _passwordText.setText("123456");
         _reEnterPasswordText.setText("123456");
+        _addressText.setText("test");
 
     }
 
@@ -149,33 +193,34 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String username = _usernameText.getText().toString();
+        final String name = _nameText.getText().toString();
+
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
+          String address = _addressText.getText().toString();
 
         Profile profile = new Profile();
         profile.setName(name);
-        profile.setUsername(username);
         profile.setEmail(email);
         profile.setMobile(mobile);
         profile.setPassword(password);
         profile.setGender(gender);
         profile.setAge(age);
+        profile.setAddress(address);
 
         final List<Profile> list = new ArrayList<>();
         list.add(profile);
 
         JSONObject postBody = new JSONObject();
         postBody.put("name", name);
-        postBody.put("username", username);
         postBody.put("email", email);
         postBody.put("mobile", mobile);
         postBody.put("password", password);
         postBody.put("gender", gender);
         postBody.put("age", age);
+        postBody.put("address", address);
 
 
         try {
@@ -196,7 +241,10 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
                                 if (success == 1) {
                                 //    ProfileRepository.insert(getApplicationContext(), list);
                                     int insertid = json.getInt("insertid");
-                                    onSignupSuccess(insertid);
+                                    String status=json.getString("status");
+                                    String message=json.getString("message");
+                                    onSignupSuccess(insertid,status,message);
+                                    Session.savePreference(getApplicationContext(),Session.name,name);
                                     progressDialog.dismiss();
                                 } else {
                                     onSignupFailed();
@@ -245,7 +293,7 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
     }
 
 
-    public void onSignupSuccess(int insertid) {
+    public void onSignupSuccess(int insertid,String status,String message) {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         String mobile = _mobileText.getText().toString();
@@ -265,7 +313,7 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
         boolean valid = true;
 
         String name = _nameText.getText().toString();
-        String username = _usernameText.getText().toString();
+
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
@@ -278,12 +326,7 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
             _nameText.setError(null);
         }
 
-        if (username.isEmpty()) {
-            _usernameText.setError("Enter Valid Username");
-            valid = false;
-        } else {
-            _usernameText.setError(null);
-        }
+
 
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -313,6 +356,14 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
         } else {
             _reEnterPasswordText.setError(null);
         }
+
+        if (!_chk_terms.isChecked()) {
+            _chk_terms.setError("Please check terms and condition");
+            valid = false;
+        } else {
+            _chk_terms.setError(null);
+        }
+
 
         return valid;
     }

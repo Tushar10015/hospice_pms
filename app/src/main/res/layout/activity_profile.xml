@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBackground"
     tools:context="com.hospicebangladesh.pms.ProfileActivity">
 
     <ScrollView
@@ -24,11 +24,7 @@
             android:focusable="true" android:focusableInTouchMode="true"
             >
 
-            <ImageView android:src="@mipmap/ic_launcher"
-                android:layout_width="wrap_content"
-                android:layout_height="72dp"
-                android:layout_marginBottom="24dp"
-                android:layout_gravity="center_horizontal" />
+
 
             <!-- Name Label -->
             <android.support.design.widget.TextInputLayout
@@ -40,21 +36,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="Name" />
+                    android:hint="Patient Name" />
             </android.support.design.widget.TextInputLayout>
 
-            <!-- Username Label -->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/input_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Username" />
-            </android.support.design.widget.TextInputLayout>
+
 
 
 
@@ -102,6 +87,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <!-- Address Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/input_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:hint="Address" />
+            </android.support.design.widget.TextInputLayout>
+
             <!-- Password Label -->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -136,6 +134,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
+                android:theme="@style/ButtonColor"
                 android:text="Update Account"/>
 
 

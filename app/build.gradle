@@ -47,5 +47,7 @@ dependencies {
 
     compile 'com.satsuware.lib:usefulviews:2.3.6'
 
+    compile 'com.github.bassaer:chatmessageview:1.9.0'
 
+    compile 'io.hypertrack:smart-scheduler:0.0.11'
 }

@@ -1,6 +1,7 @@
 package com.hospicebangladesh.pms;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -40,7 +41,7 @@ public class FollowupReportActivity extends AppCompatActivity {
 
     private static final String TAG = "FollowupReportActivity";
 
-    public String showFollowupPostUrl = "http://2aitbd.com/pms/api/get_followup.php";
+    public String showFollowupPostUrl = "get_followup.php";
 
 
     @Bind(R.id.followup_report)
@@ -110,68 +111,68 @@ public class FollowupReportActivity extends AppCompatActivity {
                                     textViewHeader1.setLayoutParams(layoutParams);
                                     textViewHeader1.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader1.setPadding(20, 20, 20, 20);
-                                    textViewHeader1.setText("fdate");
+                                    textViewHeader1.setText("Date");
 
                                     TextView textViewHeader2 = new TextView(getApplicationContext());
                                     textViewHeader2.setLayoutParams(layoutParams);
                                     textViewHeader2.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader2.setPadding(20, 20, 20, 20);
-                                    textViewHeader2.setText("ftime");
+                                    textViewHeader2.setText("Time");
 
                                     TextView textViewHeader3 = new TextView(getApplicationContext());
                                     textViewHeader3.setLayoutParams(layoutParams);
                                     textViewHeader3.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader3.setPadding(20, 20, 20, 20);
-                                    textViewHeader3.setText("bp");
+                                    textViewHeader3.setText("Bp 120/80 mmHg");
 
                                     TextView textViewHeader4 = new TextView(getApplicationContext());
                                     textViewHeader4.setLayoutParams(layoutParams);
                                     textViewHeader4.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader4.setPadding(20, 20, 20, 20);
-                                    textViewHeader4.setText("pulse");
+                                    textViewHeader4.setText("Pulse-/Min");
 
                                     TextView textViewHeader5 = new TextView(getApplicationContext());
                                     textViewHeader5.setLayoutParams(layoutParams);
                                     textViewHeader5.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader5.setPadding(20, 20, 20, 20);
-                                    textViewHeader5.setText("o2_saturation");
+                                    textViewHeader5.setText("O2 Saturation %");
 
                                     TextView textViewHeader6 = new TextView(getApplicationContext());
                                     textViewHeader6.setLayoutParams(layoutParams);
                                     textViewHeader6.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader6.setPadding(20, 20, 20, 20);
-                                    textViewHeader6.setText("temp");
+                                    textViewHeader6.setText("Temperature °C");
 
                                     TextView textViewHeader7 = new TextView(getApplicationContext());
                                     textViewHeader7.setLayoutParams(layoutParams);
                                     textViewHeader7.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader7.setPadding(20, 20, 20, 20);
-                                    textViewHeader7.setText("blood_sugar");
+                                    textViewHeader7.setText("Blood Sugar");
 
                                     TextView textViewHeader8 = new TextView(getApplicationContext());
                                     textViewHeader8.setLayoutParams(layoutParams);
                                     textViewHeader8.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader8.setPadding(20, 20, 20, 20);
-                                    textViewHeader8.setText("insulin");
+                                    textViewHeader8.setText("Insulin");
 
 
                                     TextView textViewHeader9 = new TextView(getApplicationContext());
                                     textViewHeader9.setLayoutParams(layoutParams);
                                     textViewHeader9.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader9.setPadding(20, 20, 20, 20);
-                                    textViewHeader9.setText("bowel_movement");
+                                    textViewHeader9.setText("Bowel Movement");
 
                                     TextView textViewHeader10 = new TextView(getApplicationContext());
                                     textViewHeader10.setLayoutParams(layoutParams);
                                     textViewHeader10.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader10.setPadding(20, 20, 20, 20);
-                                    textViewHeader10.setText("intake_ouput");
+                                    textViewHeader10.setText("Intake Ouput");
 
                                     TextView textViewHeader11 = new TextView(getApplicationContext());
                                     textViewHeader11.setLayoutParams(layoutParams);
                                     textViewHeader11.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader11.setPadding(20, 20, 20, 20);
-                                    textViewHeader11.setText("further_complication");
+                                    textViewHeader11.setText("Further Complication");
 
                                     tableRowHeader.addView(textViewHeader1);
                                     tableRowHeader.addView(textViewHeader2);
@@ -373,7 +374,9 @@ public class FollowupReportActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            Session.clearPreference(getApplicationContext());
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             return true;
         }
 

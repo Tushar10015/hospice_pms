@@ -19,6 +19,7 @@ public class HttpRequest {
 
     private static final String TAG = "HttpRequest";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final String BASE_URL = "http://103.16.75.42/pms/api/";
 
     public static void postRequest(String postUrl, String postBody, final HttpRequestCallBack httpRequestCallBack) throws IOException {
 
@@ -27,7 +28,7 @@ public class HttpRequest {
         RequestBody body = RequestBody.create(JSON, postBody);
 
         Request request = new Request.Builder()
-                .url(postUrl)
+                .url(BASE_URL+postUrl)
                 .post(body)
                 .build();
 
@@ -60,7 +61,7 @@ public class HttpRequest {
 
 
         Request request = new Request.Builder()
-                .url(getUrl)
+                .url(BASE_URL+getUrl)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
