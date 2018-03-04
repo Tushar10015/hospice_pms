@@ -112,7 +112,6 @@ public class PrescriptionActivity extends AppCompatActivity {
                                         JSONObject objProfiles = jsonArrayProfiles.getJSONObject(i);
 
                                         String name = objProfiles.getString("name");
-                                        String user_name = objProfiles.getString("user_name");
                                         String password = objProfiles.getString("password");
                                         String phone = objProfiles.getString("phone");
                                         String email = objProfiles.getString("email");

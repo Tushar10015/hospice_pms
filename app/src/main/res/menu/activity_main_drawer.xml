@@ -41,15 +41,15 @@
             android:title="Chat" />
     </group>
 
-    <item android:title="">
+    <item android:title="Developed By">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_perm_identity_black_24dp"
-                android:title="Developed By 2A IT" />
-            <item
-                android:id="@+id/nav_send"
-                android:title="http://2aitbd.com/" />
+                android:title="2A IT  http://2aitbd.com/"
+
+                />
+
         </menu>
     </item>
 

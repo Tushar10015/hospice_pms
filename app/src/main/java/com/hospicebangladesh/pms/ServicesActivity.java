@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.Patterns;
@@ -118,8 +119,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         _input_type.setItemsArray(defaultList);
         spinnerMap.put(defaultList[0], 0);
 
-        _input_date.setHint("Date");
-        _input_time.setHint("Time");
+
 
         if (serviceIndex == 0) {
 
@@ -183,8 +183,6 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
             _input_type.setVisibility(View.GONE);
             _input_time_spinner.setVisibility(View.GONE);
 
-            _input_date.setHint("From Time");
-            _input_time.setHint("To Time");
 
         } else if (serviceIndex == 7) {
 
@@ -275,25 +273,28 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         _input_from.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialogFrom(v);
+
+                  //  showDatePickerDialogFrom(v);
+
             }
         });
 
         _input_to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialogTo(v);
+
+                 //   showDatePickerDialogTo(v);
+
+
             }
         });
 
         _input_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(serviceIndex==6){
-                    showTimePickerDialogFrom(v);
-                }else{
+
                     showDatePickerDialog(v);
-                }
+
 
             }
         });
@@ -335,10 +336,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         DialogFragment newFragment = new ServicesActivity.TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
-    public void showTimePickerDialogFrom(View v) {
-        DialogFragment newFragment = new ServicesActivity.TimePickerFragmentFrom();
-        newFragment.show(getFragmentManager(), "timePicker");
-    }
+
 
 
     public void showDatePickerDialog(View v) {
@@ -379,26 +377,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
     }
 
 
-    public static class TimePickerFragmentFrom extends DialogFragment
-            implements TimePickerDialog.OnTimeSetListener {
 
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current time as the default values for the picker
-            final Calendar c = Calendar.getInstance();
-            int hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
-
-            // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(), this, hour, minute,
-                    DateFormat.is24HourFormat(getActivity()));
-        }
-
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            // Do something with the time chosen by the user
-            _input_date.setText(hourOfDay + ":" + minute);
-        }
-    }
 
 
     public static class DatePickerFragment extends DialogFragment
@@ -497,8 +476,8 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         String date = _input_date.getText().toString();
         String time = _input_time.getText().toString();
 
-        String date_from = _input_from.getText().toString();
-        String date_to = _input_to.getText().toString();
+        String from = _input_from.getText().toString();
+        String to = _input_to.getText().toString();
 
         if (time.equals("")) {
             if (input_time_text != null)
@@ -516,12 +495,9 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         postBody.put("service_id", serviceIndex + 1);
         postBody.put("address", address);
         postBody.put("note", note);
-
-
-        postBody.put("date_from", date_from);
-        postBody.put("date_to", date_to);
-
-            postBody.put("input_type_text", input_type_text);
+        postBody.put("from", from);
+        postBody.put("to", to);
+        postBody.put("input_type_text", input_type_text);
 
 
 
@@ -673,39 +649,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
 
 
         String mobile = _mobileText.getText().toString();
-
-
-        String date = _input_date.getText().toString();
-        String time = _input_time.getText().toString();
-
-        if (date.isEmpty()) {
-            _input_date.setError("Enter Valid Date");
-            valid = false;
-        } else {
-            _input_date.setError(null);
-        }
-
-        if (time.isEmpty()) {
-            _input_time.setError("Enter Valid Time");
-            valid = false;
-        } else {
-            _input_time.setError(null);
-        }
-
-       /* if (username.isEmpty()) {
-            _usernameText.setError("Enter Valid Username");
-            valid = false;
-        } else {
-            _usernameText.setError(null);
-        }
-
-
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("Enter a valid Email Address");
-            valid = false;
-        } else {
-            _emailText.setError(null);
-        }*/
+        String address = _addressText.getText().toString();
 
         if (mobile.isEmpty() || mobile.length() != 11) {
             _mobileText.setError("Enter Valid Mobile Number");
@@ -714,7 +658,12 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
             _mobileText.setError(null);
         }
 
-
+        if (address.isEmpty()) {
+            _addressText.setError("Enter Valid Address");
+            valid = false;
+        } else {
+            _addressText.setError(null);
+        }
         return valid;
     }
 

@@ -334,10 +334,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(browserIntent);
         }
 
-        else if (id == R.id.nav_send) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://2aitbd.com/"));
-            startActivity(browserIntent);
-        }
+
 
 
 
