@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-     //  setAuth();
+       setAuth();
 
         if(Session.getPreference(getApplicationContext(),"mobile")!=null) {
             startActivity(new Intent(this, MainActivity.class));

@@ -172,10 +172,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/buttonFollowupReport"
+                        android:id="@+id/buttonSOS"
                         android:drawableTop="@drawable/followup_r"
                         android:background="@drawable/custom_button"
-                        android:text="Followup Report"
+                        android:text="SOS"
                         android:textSize="14sp"
                         android:gravity="center|bottom"
                         android:paddingBottom="10dp"/>

@@ -79,7 +79,7 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
 
         initializeSpinner();
 
-      //  setSignup();
+        setSignup();
 
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +165,7 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
 
     private void setSignup() {
 
-        _nameText.setText("Md. Saniul Aual Tushar");
+        _nameText.setText("Md. Developer");
         _emailText.setText("saniultushar@gmail.com");
         _mobileText.setText("01748702672");
         _genderSpinner.setSelection(1);
