@@ -68,6 +68,8 @@ public class FollowupActivity extends AppCompatActivity {
     @Bind(R.id.input_further_complication)
     EditText _input_further_complication;
 
+    @Bind(R.id.buttonViewFollowupReport)
+    Button _buttonViewFollowupReport;
 
     @Bind(R.id.btn_followup)
     Button _btn_followup;
@@ -92,6 +94,14 @@ public class FollowupActivity extends AppCompatActivity {
                 } catch (JSONException e) {
 
                 }
+            }
+        });
+
+
+        _buttonViewFollowupReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FollowupActivity.this,FollowupReportActivity.class));
             }
         });
 

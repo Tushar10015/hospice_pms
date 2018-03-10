@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Username (please input 11 digit mobile number.)" />
+                    android:hint="Mobile Number" />
             </android.support.design.widget.TextInputLayout>
 
             <!--  Password Label -->

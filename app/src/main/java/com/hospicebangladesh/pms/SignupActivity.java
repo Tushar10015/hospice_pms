@@ -66,6 +66,11 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
     EditText _passwordText;
     @Bind(R.id.input_reEnterPassword)
     EditText _reEnterPasswordText;
+
+    @Bind(R.id.input_nid)
+    EditText _nidText;
+
+
     @Bind(R.id.btn_signup)
     Button _signupButton;
     @Bind(R.id.link_login)
@@ -199,7 +204,9 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
-          String address = _addressText.getText().toString();
+        String address = _addressText.getText().toString();
+        String nid = _nidText.getText().toString();
+
 
         Profile profile = new Profile();
         profile.setName(name);
@@ -209,6 +216,7 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
         profile.setGender(gender);
         profile.setAge(age);
         profile.setAddress(address);
+        profile.setNid(nid);
 
         final List<Profile> list = new ArrayList<>();
         list.add(profile);
@@ -221,7 +229,7 @@ public class SignupActivity extends AppCompatActivity implements LabelledSpinner
         postBody.put("gender", gender);
         postBody.put("age", age);
         postBody.put("address", address);
-
+        postBody.put("nid", nid);
 
         try {
             HttpRequest.postRequest(signupPostUrl, postBody.toString(), new HttpRequestCallBack() {

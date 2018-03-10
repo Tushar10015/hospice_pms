@@ -10,7 +10,7 @@ public class Profile {
     private  String age;
     private  String address;
 
-
+    private  String nid;
 
     public String getName() {
         return name;
@@ -74,5 +74,13 @@ public class Profile {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getNid() {
+        return nid;
+    }
+
+    public void setNid(String nid) {
+        this.nid = nid;
     }
 }

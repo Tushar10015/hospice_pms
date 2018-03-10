@@ -61,6 +61,9 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
     @Bind(R.id.input_address)
     EditText _addressText;
 
+    @Bind(R.id.input_nid)
+    EditText _nidText;
+
     @Bind(R.id.input_password)
     EditText _passwordText;
     @Bind(R.id.input_reEnterPassword)
@@ -173,7 +176,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
                                         String gender = objProfiles.getString("gender");
                                         String age = objProfiles.getString("age");
                                         String address = objProfiles.getString("address");
-
+                                        String nid = objProfiles.getString("nid");
 
                                         Session.savePreference(getApplicationContext(), Session.name, name);
 
@@ -184,7 +187,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
                                         _passwordText.setText(password);
                                         _reEnterPasswordText.setText(password);
                                         _addressText.setText(address);
-
+                                        _nidText.setText(nid);
 
                                         if (gender.equals("Male")) {
                                             _genderSpinner.setSelection(0);
@@ -253,7 +256,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
         String address = _addressText.getText().toString();
-
+        String nid = _nidText.getText().toString();
         JSONObject postBody = new JSONObject();
 
         String user_id = Session.getPreference(getApplicationContext(), Session.user_id);
@@ -265,6 +268,7 @@ public class ProfileActivity extends AppCompatActivity implements LabelledSpinne
         postBody.put("gender", gender);
         postBody.put("age", age);
         postBody.put("address", address);
+        postBody.put("nid", nid);
 
         try {
             HttpRequest.postRequest(profileUpdatePostUrl, postBody.toString(), new HttpRequestCallBack() {
