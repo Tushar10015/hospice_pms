@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context="com.hospicebangladesh.pms.PrescriptionActivity">
+    tools:context="com.hospicebangladesh.rpms.PrescriptionActivity">
 
 
     <LinearLayout

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hospicebangladesh.pms">
+    package="com.hospicebangladesh.rpms">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--<uses-permission android:name="android.permission.READ_CONTACTS" />-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -19,13 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name="com.hospicebangladesh.rpms.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".StartActivity"
+            android:name="com.hospicebangladesh.rpms.StartActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
@@ -36,118 +36,118 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.hospicebangladesh.rpms.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.hospicebangladesh.pms.MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity android:name="com.hospicebangladesh.rpms.LoginActivity"
             android:screenOrientation="portrait"
             ></activity>
-        <activity android:name=".SignupActivity"
+        <activity android:name="com.hospicebangladesh.rpms.SignupActivity"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".ProfileActivity"
+            android:name="com.hospicebangladesh.rpms.ProfileActivity"
             android:label="Patient Profile"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
         <activity
-            android:name=".PrescriptionActivity"
+            android:name="com.hospicebangladesh.rpms.PrescriptionActivity"
             android:label="Prescription"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
         <activity
-            android:name=".FollowupActivity"
+            android:name="com.hospicebangladesh.rpms.FollowupActivity"
             android:label="Followup"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
         <activity
-            android:name=".UploadPictureActivity"
+            android:name="com.hospicebangladesh.rpms.UploadPictureActivity"
             android:label="Upload Picture"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
         <activity
-            android:name=".InvestigationActivity"
+            android:name="com.hospicebangladesh.rpms.InvestigationActivity"
             android:label="Investigation"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
         <activity
-            android:name=".ServicesActivity"
+            android:name="com.hospicebangladesh.rpms.ServicesActivity"
             android:label="Services"
-            android:parentActivityName=".ServiceListActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.ServiceListActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ServiceListActivity" />
+                android:value="com.hospicebangladesh.rpms.ServiceListActivity" />
         </activity>
         <activity
-            android:name=".ServiceListActivity"
+            android:name="com.hospicebangladesh.rpms.ServiceListActivity"
             android:label="Service List"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
         <activity
-            android:name=".FollowupReportActivity"
+            android:name="com.hospicebangladesh.rpms.FollowupReportActivity"
             android:label="Followup Report"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
         <activity
-            android:name=".NoPaidActivity"
+            android:name="com.hospicebangladesh.rpms.NoPaidActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
         </activity>
-        <activity android:name=".ChatViewActivity"
+        <activity android:name="com.hospicebangladesh.rpms.ChatViewActivity"
             android:label="Chat Room"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.hospicebangladesh.rpms.MainActivity"
             android:screenOrientation="portrait"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.hospicebangladesh.rpms.MainActivity" />
 
         </activity>
 
