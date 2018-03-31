@@ -62,6 +62,20 @@ public class PrescriptionActivity extends AppCompatActivity {
     @Bind(R.id.textViewTime)
     TextView _textViewTime;
 
+    @Bind(R.id.textViewDoc0)
+    TextView _textViewDoc0;
+
+    @Bind(R.id.textViewDoc1)
+    TextView _textViewDoc1;
+
+    @Bind(R.id.textViewDoc2)
+    TextView _textViewDoc2;
+
+    @Bind(R.id.textViewDoc3)
+    TextView _textViewDoc3;
+
+    @Bind(R.id.textViewDoc4)
+    TextView _textViewDoc4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +97,7 @@ public class PrescriptionActivity extends AppCompatActivity {
     public void getProfile() throws JSONException {
 
 
-
-        String user_id=   Session.getPreference(getApplicationContext(),Session.user_id);
+        String user_id = Session.getPreference(getApplicationContext(), Session.user_id);
 
         JSONObject postBody = new JSONObject();
         postBody.put("user_id", user_id);
@@ -118,10 +131,9 @@ public class PrescriptionActivity extends AppCompatActivity {
                                         String age = objProfiles.getString("age");
 
 
-
-                                        _textViewPatientName.setText("Name :"+name);
-                                        _textViewSex.setText("Sex :"+gender);
-                                        _textViewAge.setText("Age :"+age);
+                                        _textViewPatientName.setText("Name :" + name);
+                                        _textViewSex.setText("Sex :" + gender);
+                                        _textViewAge.setText("Age :" + age);
 
                                     }
 
@@ -154,10 +166,7 @@ public class PrescriptionActivity extends AppCompatActivity {
         }
 
 
-
-
     }
-
 
 
     private void showPrescription() throws JSONException {
@@ -171,12 +180,12 @@ public class PrescriptionActivity extends AppCompatActivity {
 
         JSONObject postBody = new JSONObject();
 
-        String user_id=   Session.getPreference(getApplicationContext(),Session.user_id);
+        String user_id = Session.getPreference(getApplicationContext(), Session.user_id);
         postBody.put("user_id", user_id);
 
         try {
 
-            HttpRequest.postRequest(showPresPostUrl,postBody.toString(), new HttpRequestCallBack() {
+            HttpRequest.postRequest(showPresPostUrl, postBody.toString(), new HttpRequestCallBack() {
                 @Override
                 public void onSuccess(Response response) throws IOException {
 
@@ -190,6 +199,63 @@ public class PrescriptionActivity extends AppCompatActivity {
                                 JSONObject json = new JSONObject(serverResponse);
                                 int success = json.getInt("success");
                                 String message = json.getString("message");
+
+                                JSONArray jsonArrayDoctors = json.getJSONArray("doctors");
+                                int dlen = jsonArrayDoctors.length();
+                                int dcounter = 0;
+                                for (int i = 0; i < dlen; i++) {
+
+                                    JSONObject objDoctors = jsonArrayDoctors.getJSONObject(i);
+                                    String name = objDoctors.getString("name");
+
+                                    if (dlen == 1) {
+                                        _textViewDoc0.setText("1." + name);
+                                    }
+
+                                    if (dlen == 2) {
+                                        if (dcounter == 0)
+                                            _textViewDoc0.setText("1." + name);
+                                        if (dcounter == 1)
+                                            _textViewDoc1.setText("2." + name);
+                                    }
+
+                                    if (dlen == 3) {
+                                        if (dcounter == 0)
+                                            _textViewDoc0.setText("1." + name);
+                                        if (dcounter == 1)
+                                            _textViewDoc1.setText("2." + name);
+                                        if (dcounter == 2)
+                                            _textViewDoc2.setText("3." + name);
+                                    }
+
+                                    if (dlen == 4) {
+                                        if (dcounter == 0)
+                                            _textViewDoc0.setText("1." + name);
+                                        if (dcounter == 1)
+                                            _textViewDoc1.setText("2." + name);
+                                        if (dcounter == 2)
+                                            _textViewDoc2.setText("3." + name);
+                                        if (dcounter == 3)
+                                            _textViewDoc3.setText("4." + name);
+                                    }
+
+                                    if (dlen == 5) {
+                                        if (dcounter == 0)
+                                            _textViewDoc0.setText("1." + name);
+                                        if (dcounter == 1)
+                                            _textViewDoc1.setText("2." + name);
+                                        if (dcounter == 2)
+                                            _textViewDoc2.setText("3." + name);
+                                        if (dcounter == 3)
+                                            _textViewDoc3.setText("4." + name);
+                                        if (dcounter == 4)
+                                            _textViewDoc4.setText("5." + name);
+                                    }
+
+                                    dcounter++;
+                                }
+
+
                                 if (success == 1) {
                                     JSONArray jsonArrayPrescriptions = json.getJSONArray("prescriptions");
 
@@ -205,9 +271,9 @@ public class PrescriptionActivity extends AppCompatActivity {
                                         String date = parts[0];
                                         String time = parts[1];
 
-                                        _textViewId.setText("Id :"+presciption_id);
-                                        _textViewUpdatedDate.setText("Updated Date :"+date);
-                                        _textViewTime.setText("Time :"+time);
+                                        _textViewId.setText("Id :" + presciption_id);
+                                        _textViewUpdatedDate.setText("Updated Date :" + date);
+                                        _textViewTime.setText("Time :" + time);
 
                                         JSONArray jsonArrayMedicine = objPrescriptions.getJSONArray("medicin_details");
 
@@ -235,10 +301,10 @@ public class PrescriptionActivity extends AppCompatActivity {
                                     _recyclerViewMedicine.setLayoutManager(mLayoutManager);
                                     mAdapter = new MedicineAdapter(myDataset, PrescriptionActivity.this);
                                     _recyclerViewMedicine.setAdapter(mAdapter);
-                                      progressDialog.dismiss();
+                                    progressDialog.dismiss();
                                 } else {
                                     Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
-                                       progressDialog.dismiss();
+                                    progressDialog.dismiss();
                                 }
 
                             } catch (JSONException e) {
@@ -256,7 +322,7 @@ public class PrescriptionActivity extends AppCompatActivity {
                         public void run() {
                             Toast.makeText(getBaseContext(), "Server is not responding properly", Toast.LENGTH_LONG).show();
                             Log.d(TAG, " onFail");
-                             progressDialog.dismiss();
+                            progressDialog.dismiss();
 
                         }
                     });

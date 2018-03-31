@@ -2,14 +2,19 @@ package com.hospicebangladesh.rpms;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -113,6 +118,9 @@ public class MainActivity extends AppCompatActivity
         headerMobile.setText(Session.getPreference(getApplicationContext(), Session.mobile));
 
         startSlider();
+
+     //   ChatViewActivity chatViewActivity=new ChatViewActivity();
+     //   chatViewActivity.removePeriodicJob(getApplicationContext());
 
         try {
             CheckPayment payment = new CheckPayment();
@@ -227,7 +235,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 } else {
                     // Permission has already been granted
-                    sendSms();
+                    alertSms();
                 }
 
 
@@ -258,7 +266,7 @@ public class MainActivity extends AppCompatActivity
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 
-                    sendSms();
+                    alertSms();
 
                 } else {
 
@@ -272,6 +280,33 @@ public class MainActivity extends AppCompatActivity
             // permissions this app might request.
         }
     }
+
+
+    private void alertSms(){
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
+
+        builder.setTitle("Send Sms alert")
+                .setMessage("Do you want to send sms?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendSms();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+
+
+    }
+
+
 
 
     private void sendSms() {
