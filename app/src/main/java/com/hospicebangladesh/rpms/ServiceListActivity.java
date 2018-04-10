@@ -1,6 +1,7 @@
 package com.hospicebangladesh.rpms;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -140,9 +141,13 @@ public class ServiceListActivity extends AppCompatActivity {
         _buttonHospiceEstore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://hospicebangladesh.com/hospice-e-store/"));
+                startActivity(browserIntent);
+
+               /* Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
                 intent.putExtra("index",8);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 
@@ -150,9 +155,14 @@ public class ServiceListActivity extends AppCompatActivity {
         _buttonTelecare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
+
+                Uri number = Uri.parse("tel:09666788887");
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                startActivity(callIntent);
+
+              /*  Intent intent=new Intent(getApplicationContext(),ServicesActivity.class);
                 intent.putExtra("index",9);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 
