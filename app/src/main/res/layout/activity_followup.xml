@@ -68,7 +68,7 @@
                     android:id="@+id/input_bp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="BP 120/80 mmHg"
+                    android:hint="BP mmHg"
                     android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
@@ -115,7 +115,7 @@
                     android:id="@+id/input_temp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Temperature °C"
+                    android:hint="Temperature °F"
                     android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
@@ -194,7 +194,72 @@
                     android:id="@+id/input_further_complication"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Furture Complication"
+                    android:hint="Special note"
+                    android:inputType="textPersonName" />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <!-- Shortness of breath -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_shortness_breath"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Shortness of breath"
+                    android:inputType="textPersonName" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Nausea Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_nausea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nausea"
+                    android:inputType="textPersonName" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Weakness Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_weakness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Weakness"
+                    android:inputType="textPersonName" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Poor appetite Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/input_poor_appetite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Poor appetite"
                     android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 

@@ -146,7 +146,7 @@ public class UploadPictureActivity extends AppCompatActivity {
                 .addFormDataPart("file", imageName, RequestBody.create(MEDIA_TYPE_PNG, image))
                 .build();
 
-        Request request = new Request.Builder().url("http://103.16.75.42/pms/api/upload_picture.php")
+        Request request = new Request.Builder().url("http://103.16.75.42/rpms/api/upload_picture.php")
                 .post(requestBody).build();
 
 
@@ -181,6 +181,7 @@ public class UploadPictureActivity extends AppCompatActivity {
                             if (success == 1) {
                                 Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
                                    progressDialog.dismiss();
+                                _imageView.setImageDrawable(null);
                             } else {
                                 Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
                                    progressDialog.dismiss();

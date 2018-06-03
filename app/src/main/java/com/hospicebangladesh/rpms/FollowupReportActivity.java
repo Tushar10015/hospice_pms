@@ -115,7 +115,7 @@ public class FollowupReportActivity extends AppCompatActivity {
                                     textViewHeader3.setLayoutParams(layoutParams);
                                     textViewHeader3.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader3.setPadding(20, 20, 20, 20);
-                                    textViewHeader3.setText("Bp 120/80 mmHg");
+                                    textViewHeader3.setText("Bp mmHg");
 
                                     TextView textViewHeader4 = new TextView(getApplicationContext());
                                     textViewHeader4.setLayoutParams(layoutParams);
@@ -133,7 +133,7 @@ public class FollowupReportActivity extends AppCompatActivity {
                                     textViewHeader6.setLayoutParams(layoutParams);
                                     textViewHeader6.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader6.setPadding(20, 20, 20, 20);
-                                    textViewHeader6.setText("Temperature °C");
+                                    textViewHeader6.setText("Temperature °F");
 
                                     TextView textViewHeader7 = new TextView(getApplicationContext());
                                     textViewHeader7.setLayoutParams(layoutParams);
@@ -164,7 +164,35 @@ public class FollowupReportActivity extends AppCompatActivity {
                                     textViewHeader11.setLayoutParams(layoutParams);
                                     textViewHeader11.setBackgroundColor(Color.LTGRAY);
                                     textViewHeader11.setPadding(20, 20, 20, 20);
-                                    textViewHeader11.setText("Further Complication");
+                                    textViewHeader11.setText("Special Note");
+
+
+                                    TextView textViewHeader12 = new TextView(getApplicationContext());
+                                    textViewHeader12.setLayoutParams(layoutParams);
+                                    textViewHeader12.setBackgroundColor(Color.LTGRAY);
+                                    textViewHeader12.setPadding(20, 20, 20, 20);
+                                    textViewHeader12.setText("Shortness of breath");
+
+
+                                    TextView textViewHeader13 = new TextView(getApplicationContext());
+                                    textViewHeader13.setLayoutParams(layoutParams);
+                                    textViewHeader13.setBackgroundColor(Color.LTGRAY);
+                                    textViewHeader13.setPadding(20, 20, 20, 20);
+                                    textViewHeader13.setText("Nausea");
+
+                                    TextView textViewHeader14 = new TextView(getApplicationContext());
+                                    textViewHeader14.setLayoutParams(layoutParams);
+                                    textViewHeader14.setBackgroundColor(Color.LTGRAY);
+                                    textViewHeader14.setPadding(20, 20, 20, 20);
+                                    textViewHeader14.setText("Weakness");
+
+                                    TextView textViewHeader15 = new TextView(getApplicationContext());
+                                    textViewHeader15.setLayoutParams(layoutParams);
+                                    textViewHeader15.setBackgroundColor(Color.LTGRAY);
+                                    textViewHeader15.setPadding(20, 20, 20, 20);
+                                    textViewHeader15.setText("Poor appetite");
+
+
 
                                     tableRowHeader.addView(textViewHeader1);
                                     tableRowHeader.addView(textViewHeader2);
@@ -177,6 +205,11 @@ public class FollowupReportActivity extends AppCompatActivity {
                                     tableRowHeader.addView(textViewHeader9);
                                     tableRowHeader.addView(textViewHeader10);
                                     tableRowHeader.addView(textViewHeader11);
+
+                                    tableRowHeader.addView(textViewHeader12);
+                                    tableRowHeader.addView(textViewHeader13);
+                                    tableRowHeader.addView(textViewHeader14);
+                                    tableRowHeader.addView(textViewHeader15);
 
                                     _followup_report.addView(tableRowHeader);
 
@@ -197,6 +230,10 @@ public class FollowupReportActivity extends AppCompatActivity {
                                         String further_complication = objPrescriptions.getString("further_complication");
 
 
+                                        String shortness_breath = objPrescriptions.getString("shortness_breath");
+                                        String nausea = objPrescriptions.getString("nausea");
+                                        String weakness = objPrescriptions.getString("weakness");
+                                        String poor_appetite = objPrescriptions.getString("poor_appetite");
 
                                         // CREATE TABLE ROW
                                         TableRow tableRow = new TableRow(getApplicationContext());
@@ -219,6 +256,10 @@ public class FollowupReportActivity extends AppCompatActivity {
                                         TextView textViewfurther_complication = new TextView(getApplicationContext());
 
 
+                                        TextView textViewshortness_breath = new TextView(getApplicationContext());
+                                        TextView textViewnausea = new TextView(getApplicationContext());
+                                        TextView textViewweakness = new TextView(getApplicationContext());
+                                        TextView textViewpoor_appetite = new TextView(getApplicationContext());
 
                                         // SET PARAMS
 
@@ -226,16 +267,18 @@ public class FollowupReportActivity extends AppCompatActivity {
                                         textViewftime.setLayoutParams(layoutParams);
                                         textViewbp.setLayoutParams(layoutParams);
                                         textViewpulse.setLayoutParams(layoutParams);
-
                                         textViewo2_saturation.setLayoutParams(layoutParams);
                                         textViewtemp.setLayoutParams(layoutParams);
                                         textViewblood_sugar.setLayoutParams(layoutParams);
                                         textViewinsulin.setLayoutParams(layoutParams);
-
                                         textViewbowel_movement.setLayoutParams(layoutParams);
                                         textViewintake_ouput.setLayoutParams(layoutParams);
                                         textViewfurther_complication.setLayoutParams(layoutParams);
 
+                                        textViewshortness_breath.setLayoutParams(layoutParams);
+                                        textViewnausea.setLayoutParams(layoutParams);
+                                        textViewweakness.setLayoutParams(layoutParams);
+                                        textViewpoor_appetite.setLayoutParams(layoutParams);
 
                                         // SET BACKGROUND COLOR
 
@@ -252,7 +295,10 @@ public class FollowupReportActivity extends AppCompatActivity {
                                         textViewintake_ouput.setBackgroundColor(Color.WHITE);
                                         textViewfurther_complication.setBackgroundColor(Color.WHITE);
 
-
+                                        textViewshortness_breath.setBackgroundColor(Color.WHITE);
+                                        textViewnausea.setBackgroundColor(Color.WHITE);
+                                        textViewweakness.setBackgroundColor(Color.WHITE);
+                                        textViewpoor_appetite.setBackgroundColor(Color.WHITE);
 
 
                                         // SET PADDING
@@ -269,8 +315,10 @@ public class FollowupReportActivity extends AppCompatActivity {
                                         textViewbowel_movement.setPadding(20, 20, 20, 20);
                                         textViewintake_ouput.setPadding(20, 20, 20, 20);
                                         textViewfurther_complication.setPadding(20, 20, 20, 20);
-
-
+                                        textViewshortness_breath.setPadding(20, 20, 20, 20);
+                                        textViewnausea.setPadding(20, 20, 20, 20);
+                                        textViewweakness.setPadding(20, 20, 20, 20);
+                                        textViewpoor_appetite.setPadding(20, 20, 20, 20);
 
 
 
@@ -280,16 +328,18 @@ public class FollowupReportActivity extends AppCompatActivity {
                                         textViewftime.setText(ftime);
                                         textViewbp.setText(bp);
                                         textViewpulse.setText(pulse);
-
                                         textViewo2_saturation.setText(o2_saturation);
                                         textViewtemp.setText(temp);
                                         textViewblood_sugar.setText(blood_sugar);
                                         textViewinsulin.setText(insulin);
-
                                         textViewbowel_movement.setText(bowel_movement);
                                         textViewintake_ouput.setText(intake_ouput);
                                         textViewfurther_complication.setText(further_complication);
 
+                                        textViewshortness_breath.setText(shortness_breath);
+                                        textViewnausea.setText(nausea);
+                                        textViewweakness.setText(weakness);
+                                        textViewpoor_appetite.setText(poor_appetite);
 
                                         // ADD TEXTVIEW TO TABLEROW
 
@@ -304,6 +354,10 @@ public class FollowupReportActivity extends AppCompatActivity {
                                         tableRow.addView(textViewbowel_movement);
                                         tableRow.addView(textViewintake_ouput);
                                         tableRow.addView(textViewfurther_complication);
+                                        tableRow.addView(textViewshortness_breath);
+                                        tableRow.addView(textViewnausea);
+                                        tableRow.addView(textViewweakness);
+                                        tableRow.addView(textViewpoor_appetite);
 
                                         // ADD TABLEROW TO TABLELAYOUT
 

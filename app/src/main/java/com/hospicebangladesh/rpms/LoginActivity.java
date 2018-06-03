@@ -1,12 +1,15 @@
 package com.hospicebangladesh.rpms;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.link_signup)
     TextView _signupLink;
 
-
+    @Bind(R.id.forget_pass)
+    TextView _forget_pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +84,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        _forget_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+                    alertDialog.setTitle("Forget Password?");
+                    alertDialog.setMessage("Please Contact 09666911623 number for get your password");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
+
+            }
+        });
 
 
     }
@@ -244,6 +267,9 @@ public class LoginActivity extends AppCompatActivity {
 
         return valid;
     }
+
+
+
 
 
 }

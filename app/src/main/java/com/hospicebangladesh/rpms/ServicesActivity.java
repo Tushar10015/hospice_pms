@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.hospicebangladesh.rpms.http.HttpRequest;
 import com.hospicebangladesh.rpms.http.HttpRequestCallBack;
+import com.hospicebangladesh.rpms.utils.GmailSender;
 import com.hospicebangladesh.rpms.utils.Session;
 import com.satsuware.usefulviews.LabelledSpinner;
 
@@ -83,7 +85,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
 
     int serviceIndex,input_type_text=0;
     String  input_time_text;
-
+    String[] serviceList;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +101,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         _input_to = (EditText) findViewById(R.id.input_to);
 
 
-        String[] serviceList = new String[]{"Palliative Doctor Visit", "Nursing Support", "Medical Instrument Rent", "Medical Procedure", "Allied Helth Support", "Lab Support", "Ambulance", "Patient Catering", "Hospice e-store", "Telecare"};
+        serviceList = new String[]{"Palliative Doctor Visit", "Nursing Support", "Medical Instrument Rent", "Medical Procedure", "Allied Helth Support", "Lab Support", "Ambulance", "Patient Catering", "Hospice e-store", "Telecare"};
 
         serviceIndex = getIntent().getExtras().getInt("index");
         getSupportActionBar().setTitle(serviceList[serviceIndex]);
@@ -388,7 +390,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            _input_date.setText(year + "-" + month + "-" + day);
+            _input_date.setText(year + "-" + (month+1) + "-" + day);
 
         }
     }
@@ -413,7 +415,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            _input_from.setText(year + "-" + month + "-" + day);
+            _input_from.setText(year + "-" + (month+1) + "-" + day);
 
         }
     }
@@ -437,7 +439,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            _input_to.setText(year + "-" + month + "-" + day);
+            _input_to.setText(year + "-" + (month+1) + "-" + day);
 
         }
     }
@@ -506,6 +508,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
                                 int success = json.getInt("success");
                                 String message = json.getString("message");
                                 if (success == 1) {
+                                    sendMail();
                                     onSignupSuccess(message);
                                     progressDialog.dismiss();
                                 } else {
@@ -626,6 +629,15 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         _serviceButton.setEnabled(true);
         setResult(RESULT_OK, null);
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+
+    }
+
+
+    public void sendMail(){
+
+        final SendEmailTask sendEmailTask = new SendEmailTask();
+        sendEmailTask.execute();
+
     }
 
     public void onSignupFailed(String message) {
@@ -683,5 +695,50 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    class SendEmailTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("Email sending", "sending start");
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+         String service= serviceList[serviceIndex];
+
+            String mobile = _mobileText.getText().toString();
+            String address = _addressText.getText().toString();
+            String note = _noteText.getText().toString();
+
+            String myEmailString="hospicebangladesh@gmail.com";
+            String passString="kushtia17";
+            String subjectString=service;
+            String textString="From :"+mobile+" Service :"+service+" Address :"+address+" Note :"+note;
+            String sendToEmailString="hospicebangladesh@gmail.com";
+            try {
+                GmailSender sender = new GmailSender(myEmailString, passString);
+                //subject, body, sender, to
+                sender.sendMail(subjectString,
+                        textString,
+                        myEmailString,
+                        sendToEmailString);
+
+                Log.i("Email sending", "send");
+            } catch (Exception e) {
+                Log.i("Email sending", "cannot send");
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
     }
 }

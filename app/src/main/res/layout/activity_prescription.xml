@@ -16,27 +16,32 @@
         android:orientation="vertical"
         android:weightSum="10">
 
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:paddingTop="10dp"
-            app:srcCompat="@drawable/hoslogo" />
+            app:srcCompat="@drawable/hoslogo" />-->
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_below="@+id/imageView2"
             android:gravity="center"
             android:text=" Palliative Care Within Reach"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:visibility="gone"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,46 +57,48 @@
                     android:padding="@dimen/activity_horizontal_margin">
 
                     <TextView
-                        android:id="@+id/textViewUpdatedDate"
+                        android:id="@+id/textViewUpdatedDateOld"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Updated Date:" />
 
                     <TextView
                         android:id="@+id/textViewTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Time:" />
 
                     <TextView
                         android:id="@+id/textViewId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Id:" />
 
                     <TextView
                         android:id="@+id/textViewPatientName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Partner Name" />
 
                     <TextView
                         android:id="@+id/textViewSex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Sex:" />
 
                     <TextView
                         android:id="@+id/textViewAge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Age" />
 
-                    <!--<TextView-->
-                    <!--android:id="@+id/textViewDiagnosis"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Diagnosis:" />-->
+
 
                 </LinearLayout>
 
@@ -106,34 +113,40 @@
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Consulting Doctor: " />
 
                     <TextView
                         android:id="@+id/textViewDoc0"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="" />
 
                     <TextView
                         android:id="@+id/textViewDoc1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="" />
 
                     <TextView
                         android:id="@+id/textViewDoc2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="" />
                     <TextView
                         android:id="@+id/textViewDoc3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="" />
                     <TextView
                         android:id="@+id/textViewDoc4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="" />
                 </LinearLayout>
             </LinearLayout>
@@ -142,21 +155,45 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6"
+            android:layout_weight="8"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Advised:"
-                android:paddingBottom="10dp"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingTop="15dp"
+                >
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Advised:"
+                    android:paddingLeft="15dp"
+                    android:paddingBottom="10dp"
+                    android:layout_weight="1"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewUpdatedDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Updated Date:"
+                    android:layout_weight="1"
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
                 android:weightSum="4"
                 >
 
@@ -165,7 +202,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:paddingLeft="20dp"
                     android:text="Medicine" />
@@ -174,7 +211,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:paddingLeft="25dp"
                     android:text="Dose" />
@@ -183,7 +220,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:paddingLeft="25dp"
                     android:text="Note" />
@@ -192,7 +229,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:paddingLeft="20dp"
                     android:text="Duration" />

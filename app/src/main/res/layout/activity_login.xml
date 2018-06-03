@@ -78,6 +78,15 @@
                 android:theme="@style/ButtonColor"
                 android:text="Login"/>
 
+            <TextView android:id="@+id/forget_pass"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="Forget password?"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="16dip"/>
+
             <TextView android:id="@+id/link_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

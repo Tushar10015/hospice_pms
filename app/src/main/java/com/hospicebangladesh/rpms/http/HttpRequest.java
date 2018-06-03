@@ -16,7 +16,7 @@ public class HttpRequest {
 
     private static final String TAG = "HttpRequest";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private static final String BASE_URL = "http://103.16.75.42/pms/api/";
+    private static final String BASE_URL = "http://hbdhealth.com/rpms/api/";
 
     public static void postRequest(String postUrl, String postBody, final HttpRequestCallBack httpRequestCallBack) throws IOException {
 

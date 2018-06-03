@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,7 +38,7 @@ public class PrescriptionActivity extends AppCompatActivity {
     private static final String TAG = "PrescriptionActivity";
     public String showPresPostUrl = "get_prescription.php";
     public String profileGetPostUrl = "get_profile.php";
-
+    public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -297,6 +299,10 @@ public class PrescriptionActivity extends AppCompatActivity {
                                         }
                                     }
 
+
+                                    _recyclerViewMedicine.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.HORIZONTAL));
+                                    _recyclerViewMedicine.setHasFixedSize(true);
+                                    _recyclerViewMedicine.setItemAnimator(new DefaultItemAnimator());
                                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
                                     _recyclerViewMedicine.setLayoutManager(mLayoutManager);
                                     mAdapter = new MedicineAdapter(myDataset, PrescriptionActivity.this);

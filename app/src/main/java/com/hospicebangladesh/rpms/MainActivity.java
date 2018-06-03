@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
 
         builder.setTitle("Send Sms alert")
-                .setMessage("Do you want to send sms?")
+                .setMessage("Do you want to send a emergency message for patient?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         sendSms();
@@ -342,7 +342,7 @@ public class MainActivity extends AppCompatActivity
                                         mob_maps.put("mob1",mob1);
                                         mob_maps.put("mob2",mob2);
                                         mob_maps.put("mob3",mob3);
-
+                                        mob_maps.put("mob4",Session.getPreference(getApplicationContext(),"mobile"));
                                     }
 
                                     for (String name : mob_maps.keySet()) {
@@ -617,6 +617,22 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), ChatViewActivity.class));
         } else if (id == R.id.nav_share) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://2aitbd.com/"));
+            startActivity(browserIntent);
+        }
+
+        else if (id == R.id.nav_helpline) {
+            Uri number = Uri.parse("tel:09666911604");
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            startActivity(callIntent);
+        }
+
+        else if (id == R.id.nav_web) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://hospicebangladesh.com/"));
+            startActivity(browserIntent);
+        }
+
+        else if (id == R.id.nav_facebook) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/hospicebangladesh/"));
             startActivity(browserIntent);
         }
 

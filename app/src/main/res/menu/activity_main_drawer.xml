@@ -6,39 +6,49 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_patient_profile"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Patient Profile" />
         <item
             android:id="@+id/nav_prescription"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Prescription" />
         <item
             android:id="@+id/nav_investigation"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Investigation" />
         <item
             android:id="@+id/nav_followup"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Followup" />
 
         <item
             android:id="@+id/nav_services"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Services" />
         <item
             android:id="@+id/nav_upload_picture"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Upload Picture" />
 
         <item
             android:id="@+id/nav_followup_report"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Followup Report" />
 
         <item
             android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_forward_black_24dp"
             android:title="Chat" />
+
+       <item
+            android:id="@+id/nav_helpline"
+            android:title="Helpline:+88-09666-911604" />
+
+
+     <!--   <item
+            android:id="@+id/nav_address2"
+            android:icon="@drawable/ic_forward_black_24dp"
+            android:title="2.Email:hospicebangladesh@gmail.com" />-->
+
+        <item
+            android:id="@+id/nav_web"
+            android:title="Hospice Bangladesh" />
+
+        <item
+            android:id="@+id/nav_facebook"
+            android:title="Hospice Facebook" />
     </group>
 
     <item android:title="Developed By">

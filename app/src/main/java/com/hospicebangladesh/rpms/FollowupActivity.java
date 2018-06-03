@@ -66,6 +66,17 @@ public class FollowupActivity extends AppCompatActivity {
     @Bind(R.id.input_further_complication)
     EditText _input_further_complication;
 
+    @Bind(R.id.input_shortness_breath)
+    EditText _input_shortness_breath;
+    @Bind(R.id.input_nausea)
+    EditText _input_nausea;
+    @Bind(R.id.input_weakness)
+    EditText _input_weakness;
+    @Bind(R.id.input_poor_appetite)
+    EditText _input_poor_appetite;
+
+
+
     @Bind(R.id.buttonViewFollowupReport)
     Button _buttonViewFollowupReport;
 
@@ -171,7 +182,7 @@ public class FollowupActivity extends AppCompatActivity {
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            _input_date.setText(year + "-" + month + "-" + day);
+            _input_date.setText(year + "-" + (month+1) + "-" + day);
         }
     }
 
@@ -205,6 +216,12 @@ public class FollowupActivity extends AppCompatActivity {
         String date = _input_date.getText().toString();
         String time = _input_time.getText().toString();
 
+        String shortness_breath =  _input_shortness_breath.getText().toString();
+        String nausea =  _input_nausea.getText().toString();
+        String weakness =  _input_weakness.getText().toString();
+        String poor_appetite =  _input_poor_appetite.getText().toString();
+
+
         JSONObject postBody = new JSONObject();
         postBody.put("user_id", Session.getPreference(getApplicationContext(), Session.user_id));
         postBody.put("date", date);
@@ -218,6 +235,11 @@ public class FollowupActivity extends AppCompatActivity {
         postBody.put("bowel_movement", bowel_movement);
         postBody.put("intake_ouput", intake_ouput);
         postBody.put("further_complication", further_complication);
+
+        postBody.put("shortness_breath", shortness_breath);
+        postBody.put("nausea", nausea);
+        postBody.put("weakness", weakness);
+        postBody.put("poor_appetite", poor_appetite);
 
         try {
             HttpRequest.postRequest(profileUpdatePostUrl, postBody.toString(), new HttpRequestCallBack() {
@@ -316,7 +338,7 @@ public class FollowupActivity extends AppCompatActivity {
 
 
 
-        if (bp.isEmpty()) {
+      /*  if (bp.isEmpty()) {
             _input_bp.setError("Enter Valid Bp");
             valid = false;
         } else {
@@ -331,7 +353,7 @@ public class FollowupActivity extends AppCompatActivity {
             _input_pulse.setError(null);
         }
 
-       /* if (o2_saturation.isEmpty()) {
+        if (o2_saturation.isEmpty()) {
             _input_o2_saturation.setError("Enter Valid O2 Saturation");
             valid = false;
         } else {
