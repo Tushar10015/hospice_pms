@@ -76,6 +76,9 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
     @Bind(R.id.btn_service)
     Button _serviceButton;
 
+
+
+
     static EditText _input_date;
     static EditText _input_time;
 
@@ -84,7 +87,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
 
 
     int serviceIndex,input_type_text=0;
-    String  input_time_text;
+    String  input_time_text,input_type;
     String[] serviceList;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
 
         _input_from = (EditText) findViewById(R.id.input_from);
         _input_to = (EditText) findViewById(R.id.input_to);
+
 
 
         serviceList = new String[]{"Palliative Doctor Visit", "Nursing Support", "Medical Instrument Rent", "Medical Procedure", "Allied Helth Support", "Lab Support", "Ambulance", "Patient Catering", "Hospice e-store", "Telecare"};
@@ -313,6 +317,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
             case R.id.input_type:
 
                input_type_text =spinnerMap.get((String)adapterView.getItemAtPosition(position)) ;
+                input_type=  (String) adapterView.getItemAtPosition(position);
                 break;
 
         }
@@ -470,6 +475,8 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         String from = _input_from.getText().toString();
         String to = _input_to.getText().toString();
 
+
+
         if (time.equals("")) {
             if (input_time_text != null)
                 time = input_time_text;
@@ -489,6 +496,7 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
         postBody.put("from", from);
         postBody.put("to", to);
         postBody.put("input_type_text", input_type_text);
+
 
 
 
@@ -715,11 +723,17 @@ public class ServicesActivity extends AppCompatActivity implements LabelledSpinn
             String address = _addressText.getText().toString();
             String note = _noteText.getText().toString();
 
-            String myEmailString="hospicebangladesh@gmail.com";
-            String passString="kushtia17";
+            String date = _input_date.getText().toString();
+            String time = _input_time.getText().toString();
+
+            String myEmailString="hoshealthbd@gmail.com";
+            String passString="kushtia889";
+
             String subjectString=service;
-            String textString="From :"+mobile+" Service :"+service+" Address :"+address+" Note :"+note;
+            String textString=" From : "+mobile+"\n Service : "+service+"\n Type : "+input_type+"\n Address : "+address+"\n Note : "+note+"\n Date : "+date+"\n Time : "+time;
             String sendToEmailString="hospicebangladesh@gmail.com";
+          //  String sendToEmailString="hoshealthbd@gmail.com";
+
             try {
                 GmailSender sender = new GmailSender(myEmailString, passString);
                 //subject, body, sender, to

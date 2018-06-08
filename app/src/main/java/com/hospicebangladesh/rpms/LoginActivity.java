@@ -197,7 +197,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-       /* new android.os.Handler().postDelayed(
+       /*
+        new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
@@ -205,7 +206,8 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);*/
+                }, 3000);
+                */
 
 
     }

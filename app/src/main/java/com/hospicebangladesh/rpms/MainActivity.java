@@ -208,8 +208,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
+                Uri number = Uri.parse("tel:8809666911623");
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                startActivity(callIntent);
 
-                if (ContextCompat.checkSelfPermission(MainActivity.this,
+
+             /*   if (ContextCompat.checkSelfPermission(MainActivity.this,
                         Manifest.permission.SEND_SMS)
                         != PackageManager.PERMISSION_GRANTED) {
 
@@ -236,7 +240,7 @@ public class MainActivity extends AppCompatActivity
                 } else {
                     // Permission has already been granted
                     alertSms();
-                }
+                }*/
 
 
             }

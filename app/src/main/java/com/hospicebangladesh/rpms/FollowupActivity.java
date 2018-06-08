@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.hospicebangladesh.rpms.http.HttpRequest;
 import com.hospicebangladesh.rpms.http.HttpRequestCallBack;
 import com.hospicebangladesh.rpms.utils.Session;
+import com.satsuware.usefulviews.LabelledSpinner;
 
 
 import org.json.JSONException;
@@ -75,7 +76,8 @@ public class FollowupActivity extends AppCompatActivity {
     @Bind(R.id.input_poor_appetite)
     EditText _input_poor_appetite;
 
-
+    @Bind(R.id.input_pain_spinner)
+    LabelledSpinner _input_pain_spinner;
 
     @Bind(R.id.buttonViewFollowupReport)
     Button _buttonViewFollowupReport;
@@ -94,7 +96,8 @@ public class FollowupActivity extends AppCompatActivity {
 
          _input_date = (EditText) findViewById(R.id.input_date);
          _input_time = (EditText) findViewById(R.id.input_time);
-
+        String[] painList = new String[]{"1", "2","3","4", "5","6","7", "8","9","10"};
+        _input_pain_spinner.setItemsArray(painList);
         _btn_followup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,7 +223,7 @@ public class FollowupActivity extends AppCompatActivity {
         String nausea =  _input_nausea.getText().toString();
         String weakness =  _input_weakness.getText().toString();
         String poor_appetite =  _input_poor_appetite.getText().toString();
-
+        String pain=  _input_pain_spinner.getSpinner().getSelectedItem().toString();
 
         JSONObject postBody = new JSONObject();
         postBody.put("user_id", Session.getPreference(getApplicationContext(), Session.user_id));
@@ -240,6 +243,8 @@ public class FollowupActivity extends AppCompatActivity {
         postBody.put("nausea", nausea);
         postBody.put("weakness", weakness);
         postBody.put("poor_appetite", poor_appetite);
+        postBody.put("pain", pain);
+
 
         try {
             HttpRequest.postRequest(profileUpdatePostUrl, postBody.toString(), new HttpRequestCallBack() {

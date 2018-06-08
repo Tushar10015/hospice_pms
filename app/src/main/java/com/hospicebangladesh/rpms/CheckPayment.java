@@ -24,7 +24,6 @@ public class CheckPayment {
     public static String checkPaymentPostUrl = "check_payment.php";
 
 
-
     public  void  checkPayment(final Context context,final HttpRequestCallBack httpRequestCallBack) throws JSONException {
 
         JSONObject postBody = new JSONObject();
@@ -80,9 +79,6 @@ public class CheckPayment {
             Session.savePreference(context,"message",e.toString());
 
         }
-
-
-
 
     }
 

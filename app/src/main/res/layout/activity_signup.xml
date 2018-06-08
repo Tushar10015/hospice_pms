@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:hint="Patient Name" />
+                    android:hint="Patient Name *" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Mobile Number" />
+                    android:hint="Mobile Number *" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -89,7 +89,7 @@
 
             <com.satsuware.usefulviews.LabelledSpinner
                 android:id="@+id/input_gender"
-                ls:labelText="Select Gender"
+                ls:labelText="Select Gender *"
                 ls:widgetColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -109,7 +109,7 @@
 
             <com.satsuware.usefulviews.LabelledSpinner
                 android:id="@+id/input_age"
-                ls:labelText="Select Age"
+                ls:labelText="Select Age *"
                 ls:widgetColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -153,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:hint="Password"/>
+                    android:hint="Password *"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- Password Re-enter Label -->
@@ -166,7 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:hint="Re-enter Password"/>
+                    android:hint="Re-enter Password *"/>
             </android.support.design.widget.TextInputLayout>
 
             <CheckBox
