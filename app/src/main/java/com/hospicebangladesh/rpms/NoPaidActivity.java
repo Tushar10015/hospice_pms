@@ -3,6 +3,7 @@ package com.hospicebangladesh.rpms;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,6 +53,7 @@ public class NoPaidActivity extends AppCompatActivity
 
         String messge = getIntent().getExtras().getString("message");
         _textViewLabel.setText(messge);
+        _textViewLabel.setMovementMethod(new ScrollingMovementMethod());
 
         _buttonServices.setOnClickListener(new View.OnClickListener() {
             @Override

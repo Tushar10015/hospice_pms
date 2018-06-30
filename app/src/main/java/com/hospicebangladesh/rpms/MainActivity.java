@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                Uri number = Uri.parse("tel:8809666911623");
+                Uri number = Uri.parse("tel:09666911623");
                 Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
                 startActivity(callIntent);
 

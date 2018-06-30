@@ -61,20 +61,20 @@ public class FollowupActivity extends AppCompatActivity {
     @Bind(R.id.input_insulin)
     EditText _input_insulin;
     @Bind(R.id.input_bowel_movement)
-    EditText _input_bowel_movement;
+    LabelledSpinner _input_bowel_movement;
     @Bind(R.id.input_intake_ouput)
     EditText _input_intake_ouput;
     @Bind(R.id.input_further_complication)
     EditText _input_further_complication;
 
     @Bind(R.id.input_shortness_breath)
-    EditText _input_shortness_breath;
+    LabelledSpinner _input_shortness_breath;
     @Bind(R.id.input_nausea)
-    EditText _input_nausea;
+    LabelledSpinner _input_nausea;
     @Bind(R.id.input_weakness)
-    EditText _input_weakness;
+    LabelledSpinner _input_weakness;
     @Bind(R.id.input_poor_appetite)
-    EditText _input_poor_appetite;
+    LabelledSpinner _input_poor_appetite;
 
     @Bind(R.id.input_pain_spinner)
     LabelledSpinner _input_pain_spinner;
@@ -96,8 +96,16 @@ public class FollowupActivity extends AppCompatActivity {
 
          _input_date = (EditText) findViewById(R.id.input_date);
          _input_time = (EditText) findViewById(R.id.input_time);
-        String[] painList = new String[]{"1", "2","3","4", "5","6","7", "8","9","10"};
+        String[] painList = new String[]{"0","1", "2","3","4", "5","6","7", "8","9","10"};
+        String[] bowelList = new String[]{"Yes","No"};
         _input_pain_spinner.setItemsArray(painList);
+
+        _input_shortness_breath.setItemsArray(painList);
+        _input_nausea.setItemsArray(painList);
+        _input_weakness.setItemsArray(painList);
+        _input_poor_appetite.setItemsArray(painList);
+        _input_bowel_movement.setItemsArray(bowelList);
+
         _btn_followup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,17 +220,17 @@ public class FollowupActivity extends AppCompatActivity {
         String blood_sugar = _input_blood_sugar.getText().toString();
         String insulin = _input_insulin.getText().toString();
 
-        String bowel_movement = _input_bowel_movement.getText().toString();
+        String bowel_movement = _input_bowel_movement.getSpinner().getSelectedItem().toString();
         String intake_ouput = _input_intake_ouput.getText().toString();
         String further_complication = _input_further_complication.getText().toString();
 
         String date = _input_date.getText().toString();
         String time = _input_time.getText().toString();
 
-        String shortness_breath =  _input_shortness_breath.getText().toString();
-        String nausea =  _input_nausea.getText().toString();
-        String weakness =  _input_weakness.getText().toString();
-        String poor_appetite =  _input_poor_appetite.getText().toString();
+        String shortness_breath =  _input_shortness_breath.getSpinner().getSelectedItem().toString();
+        String nausea =  _input_nausea.getSpinner().getSelectedItem().toString();
+        String weakness =  _input_weakness.getSpinner().getSelectedItem().toString();
+        String poor_appetite =  _input_poor_appetite.getSpinner().getSelectedItem().toString();
         String pain=  _input_pain_spinner.getSpinner().getSelectedItem().toString();
 
         JSONObject postBody = new JSONObject();
@@ -319,7 +327,7 @@ public class FollowupActivity extends AppCompatActivity {
         String blood_sugar = _input_blood_sugar.getText().toString();
         String insulin = _input_insulin.getText().toString();
 
-        String bowel_movement = _input_bowel_movement.getText().toString();
+        String bowel_movement = _input_bowel_movement.getSpinner().getSelectedItem().toString();
         String intake_ouput = _input_intake_ouput.getText().toString();
         String further_complication = _input_further_complication.getText().toString();
 
